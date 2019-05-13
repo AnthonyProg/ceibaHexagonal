@@ -36,7 +36,7 @@ public class VehicleRegistrationRepositoryImp implements VehicleRegitrationRepos
         	session.persist(vehicleRegistration);
         	return vehicleRegistration;        	
         }catch (Exception ex){
-            throw new VehicleRegistrationException("Error guardando el registro de entrada del vehiculo");
+            throw new VehicleRegistrationException("Error guardando el registro de entrada del vehiculo", ex);
         }
 	}
 
