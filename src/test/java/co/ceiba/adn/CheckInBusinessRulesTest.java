@@ -20,6 +20,18 @@ public class CheckInBusinessRulesTest {
 	CheckInBusinessRules businessRules;
 	
 	@Test
+	public void siElRegistroEsCorrectoRetornaVerdadero() {
+		VehicleRegistration regitroVehiculo = new VehicleRegistrationBuilder().conPlacaCorrecta().conDiaCorrecto().build();
+		assertTrue(businessRules.applyBusinessRules(regitroVehiculo));
+	}
+	
+	@Test
+	public void siElRegistroEsInCorrectoRetornaFalso() {
+		VehicleRegistration regitroVehiculo = new VehicleRegistrationBuilder().conPlacaErrada().conDiaCorrecto().build();
+		assertFalse(businessRules.applyBusinessRules(regitroVehiculo));
+	}
+	
+	@Test
 	public void siTipoVehiculoEsIncorrectoEntoncesRetornaFalso() {
 		VehicleRegistration regitroVehiculo = new VehicleRegistrationBuilder().conTipoDeVehiculoErrado().build();
 		assertFalse(businessRules.checkVehicleType(regitroVehiculo));
@@ -46,6 +58,12 @@ public class CheckInBusinessRulesTest {
 	@Test
 	public void siPlacaEmpiezaPorLaLetraConfiguradaYNOEsElDiaCorrectoEntoncesRetornaFalso() {
 		VehicleRegistration registroVehiculo = new VehicleRegistrationBuilder().conPlacaCorrecta().conDiaIncorrecto().build();
+		assertFalse(businessRules.checkVahiclePlate(registroVehiculo));
+	}
+	
+	@Test
+	public void siPlacaNOEmpiezaPorLaLetraConfiguradaYNOEsElDiaCorrectoEntoncesRetornaFalso() {
+		VehicleRegistration registroVehiculo = new VehicleRegistrationBuilder().conPlacaErrada().conDiaIncorrecto().build();
 		assertFalse(businessRules.checkVahiclePlate(registroVehiculo));
 	}
 	
