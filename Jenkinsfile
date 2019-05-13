@@ -33,15 +33,17 @@ pipeline {
 		    }      
 		  	
 		  	stage('Unit Tests') {      
-		  		steps{        
-		  			sh 'gradle --b ./build.gradle test'
-		  			sh 'gradle test'      
+		  		steps{        		  			
+		  			sh 'gradle --b ./build.gradle test'      
 		  		}    
 		  	}    
 		  	
 		  	stage('Integration Tests') {      
 		  		steps {        
-		  			echo "------------>Integration Tests<------------"      
+		  			echo "------------>Integration Tests<------------" 
+		  			sh 'gradle --stacktrace test'
+		  			junit '**/build/test-results/test/*.xml'
+		  			step([$class: 'JacocoPublisher'])    
 		  		}    
 		  	}    
 		  	stage('Static Code Analysis') {      
