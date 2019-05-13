@@ -19,7 +19,13 @@ public class VehicleRegistrationBuilder {
 		return this;
 	}
 	
-	public VehicleRegistrationBuilder conTipoDeVehiculoCorrecto() {
+	public VehicleRegistrationBuilder moto() {
+		VehicleType vehicleType = new VehicleType("MOTO");
+		this.tipoVehiculo = vehicleType;
+		return this;
+	}
+	
+	public VehicleRegistrationBuilder carro() {
 		VehicleType vehicleType = new VehicleType("CARRO");
 		this.tipoVehiculo = vehicleType;
 		return this;
