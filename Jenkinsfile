@@ -35,7 +35,6 @@ pipeline {
 		  	stage('Unit Tests') {      
 		  		steps{        
 		  			sh 'gradle --b ./build.gradle test'
-		  			sh 'make check'
 		  			junit 'reports/**/*.xml'      
 		  		}    
 		  	}    
