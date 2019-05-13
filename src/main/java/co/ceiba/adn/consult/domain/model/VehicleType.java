@@ -39,7 +39,10 @@ public class VehicleType implements Serializable {
 
 	@Override
 	public int hashCode() {
-		return this.hashCode();
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((type == null) ? 0 : type.hashCode());
+		return result;
 	}
 
 	@Override
@@ -54,9 +57,10 @@ public class VehicleType implements Serializable {
 		if (type == null) {
 			if (other.type != null)
 				return false;
-		} else if (!type.equals(other.type)) {
+		} else if (!type.equals(other.type))
 			return false;
-		}			
 		return true;
 	}
+
+	
 }
