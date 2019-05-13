@@ -64,12 +64,22 @@ public class CheckInBusinessRulesTest {
 	
 	@Test
 	public void debeRetornarValorCarros() throws ConfigurationException {
-		assertTrue(businessRules.getMaxCars() > 0);
+		assertTrue(businessRules.getMaxCars("20") > 0);
 	}
 	
 	@Test
 	public void debeRetornarValorMotos() throws ConfigurationException {
-		assertTrue(businessRules.getMaxBikes() > 0);		
+		assertTrue(businessRules.getMaxBikes("10") > 0);		
+	}
+	
+	@Test(expected = ConfigurationException.class)
+	public void debeRetornarExcepcion() throws ConfigurationException {
+		businessRules.getMaxCars(null);
+	}
+	
+	@Test(expected = ConfigurationException.class)
+	public void debeRetornarExcepcions() throws ConfigurationException {
+		businessRules.getMaxBikes(null);		
 	}
 	
 	

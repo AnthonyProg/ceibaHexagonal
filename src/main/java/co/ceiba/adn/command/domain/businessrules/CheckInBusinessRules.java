@@ -45,20 +45,20 @@ public class CheckInBusinessRules {
 	
 	public boolean checkAvailableSpace(VehicleRegistration vehicleRegistration) throws ConfigurationException{
 		long occupied = getOccupiedPlaces(vehicleRegistration);		
-		return getMaxCars() != occupied || getMaxBikes() != occupied;
+		return getMaxCars(systemConfigurations.getProperty("config.max-cars")) != occupied || getMaxBikes(systemConfigurations.getProperty("config.max-bikes")) != occupied;
 	}
 	
-	public int getMaxCars() throws ConfigurationException {
+	public int getMaxCars(String value) throws ConfigurationException {
 		try {
-			return Integer.parseInt(systemConfigurations.getProperty("config.max-cars"));
+			return Integer.parseInt(value);
 		}catch(Exception ex) {
 			throw new ConfigurationException("Configuracion no disponible en el archivo application.properties", ex);
 		}		
 	}
 	
-	public int getMaxBikes() throws ConfigurationException {
+	public int getMaxBikes(String value) throws ConfigurationException {
 		try {
-			return Integer.parseInt(systemConfigurations.getProperty("config.max-bikes"));
+			return Integer.parseInt(value);
 		}catch(Exception ex) {
 			throw new ConfigurationException("Configuracion no disponible en el archivo application.properties", ex);
 		}		
