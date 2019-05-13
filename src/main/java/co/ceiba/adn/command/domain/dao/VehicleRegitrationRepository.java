@@ -2,6 +2,7 @@ package co.ceiba.adn.command.domain.dao;
 
 import java.util.List;
 
+import co.ceiba.adn.command.domain.exception.VehicleRegistrationException;
 import co.ceiba.adn.command.domain.model.VehicleRegistration;
 
 public interface VehicleRegitrationRepository {
@@ -16,7 +17,8 @@ public interface VehicleRegitrationRepository {
 	/**
 	 * Permite guardar el registro de entrada al parqueadero	 
 	 * @return void
+	 * @throws VehicleRegistrationException 
 	 */
-	VehicleRegistration save(VehicleRegistration vehicleRegistration) throws Exception;
+	VehicleRegistration save(VehicleRegistration vehicleRegistration) throws VehicleRegistrationException;
 
 }

@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import co.ceiba.adn.command.domain.dao.VehicleRegitrationRepository;
+import co.ceiba.adn.command.domain.exception.VehicleRegistrationException;
 import co.ceiba.adn.command.domain.model.VehicleRegistration;
 
 @Component
@@ -30,12 +31,12 @@ public class VehicleRegistrationRepositoryImp implements VehicleRegitrationRepos
 	}
 
 	@Override
-	public VehicleRegistration save(VehicleRegistration vehicleRegistration) throws Exception {
+	public VehicleRegistration save(VehicleRegistration vehicleRegistration) throws VehicleRegistrationException {
         try(Session session = entityManager.unwrap(Session.class)){
         	session.persist(vehicleRegistration);
         	return vehicleRegistration;        	
         }catch (Exception ex){
-            throw new Exception("Ocurrio un error persistiendo el registro del parqueadero" + ex);
+            throw new VehicleRegistrationException("Error guardando el registro de entrada del vehiculo");
         }
 	}
 

@@ -20,7 +20,7 @@ public class CheckInBusinessRules {
 	@Autowired
 	private VehicleTypeRepository vehicleTypeRepository;
 	
-	public boolean applyBusinessRules(VehicleRegistration vehicleRegistration) throws Exception{
+	public boolean applyBusinessRules(VehicleRegistration vehicleRegistration){
 		return checkVehicleType(vehicleRegistration) && checkVahiclePlate(vehicleRegistration); 
 	}
 	
