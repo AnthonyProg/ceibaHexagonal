@@ -35,7 +35,7 @@ pipeline {
 		  	stage('Unit Tests') {      
 		  		steps{        
 		  			sh 'gradle --b ./build.gradle test'
-		  			junit 'gradle test'      
+		  			sh 'gradle test'      
 		  		}    
 		  	}    
 		  	
