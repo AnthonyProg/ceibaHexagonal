@@ -52,7 +52,7 @@ public class CheckInBusinessRulesTest {
 	}
 	
 	@Test
-	public void siPlacaNOEmpiezaPorLaLetraConfiguradaYEsElDiaCorrectoEntoncesRetornaFalso() {
+	public void siPlacaNOEmpiezaPorLaLetraConfiguradaYNOEsElDiaCorrectoEntoncesRetornaFalso() {
 		VehicleRegistration registroVehiculo = new VehicleRegistrationBuilder().conPlacaErrada().conDiaCorrecto().build();
 		assertTrue(businessRules.checkVehiclePlate(registroVehiculo));
 	}
