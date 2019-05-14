@@ -9,9 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import co.ceiba.adn.command.domain.businessrules.CheckInBusinessRules;
-import co.ceiba.adn.command.domain.exception.ConfigurationException;
-import co.ceiba.adn.command.domain.model.VehicleRegistration;
+import co.ceiba.adn.domain.businessrules.CheckInBusinessRules;
+import co.ceiba.adn.domain.exception.ConfigurationException;
+import co.ceiba.adn.domain.model.VehicleRegistration;
 
 @RunWith(SpringRunner.class)
 @DataJpaTest
@@ -19,18 +19,7 @@ public class CheckInBusinessRulesTest {
 	
 	@Autowired
 	CheckInBusinessRules businessRules;
-	
-	@Test
-	public void siElRegistroEsCorrectoRetornaVerdadero() {
-		VehicleRegistration regitroVehiculo = new VehicleRegistrationBuilder().carro().conPlacaCorrecta().conDiaCorrecto().build();
-		assertTrue(businessRules.applyBusinessRules(regitroVehiculo));
-	}
-	
-	@Test
-	public void siElRegistroEsInCorrectoRetornaFalso() {
-		VehicleRegistration regitroVehiculo = new VehicleRegistrationBuilder().conPlacaErrada().conDiaCorrecto().build();
-		assertFalse(businessRules.applyBusinessRules(regitroVehiculo));
-	}
+
 	
 	@Test
 	public void siTipoVehiculoEsIncorrectoEntoncesRetornaFalso() {
@@ -80,9 +69,5 @@ public class CheckInBusinessRulesTest {
 	@Test(expected = ConfigurationException.class)
 	public void debeRetornarExcepcions() throws ConfigurationException {
 		businessRules.getMaxBikes(null);		
-	}
-	
-	
-	
-	
+	}	
 }

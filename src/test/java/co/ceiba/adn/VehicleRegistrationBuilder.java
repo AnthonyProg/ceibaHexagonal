@@ -1,7 +1,7 @@
 package co.ceiba.adn;
 
-import co.ceiba.adn.command.domain.model.VehicleRegistration;
-import co.ceiba.adn.consult.domain.model.VehicleType;
+import co.ceiba.adn.domain.model.VehicleRegistration;
+import co.ceiba.adn.domain.model.VehicleType;
 
 public class VehicleRegistrationBuilder {
 	
@@ -13,21 +13,18 @@ public class VehicleRegistrationBuilder {
 	String color = "Amarillo";
 	String marca = "Toyota";
 		
-	public VehicleRegistrationBuilder conTipoDeVehiculoErrado() {
-		VehicleType vehicleType = new VehicleType("AVION");
-		this.tipoVehiculo = vehicleType;
+	public VehicleRegistrationBuilder conTipoDeVehiculoErrado() {		
+		this.tipoVehiculo = new VehicleType("AVION");
 		return this;
 	}
 	
-	public VehicleRegistrationBuilder moto() {
-		VehicleType vehicleType = new VehicleType("MOTO");
-		this.tipoVehiculo = vehicleType;
+	public VehicleRegistrationBuilder moto() {		
+		this.tipoVehiculo = new VehicleType("MOTO");;
 		return this;
 	}
 	
-	public VehicleRegistrationBuilder carro() {
-		VehicleType vehicleType = new VehicleType("CARRO");
-		this.tipoVehiculo = vehicleType;
+	public VehicleRegistrationBuilder carro() {		
+		this.tipoVehiculo = new VehicleType("CARRO");
 		return this;
 	}
 	
@@ -53,6 +50,6 @@ public class VehicleRegistrationBuilder {
 	
 	
 	public VehicleRegistration build() {
-		return new VehicleRegistration(tiempoIngreso, tiempoSalida, placa, marca,  modelo, color, tipoVehiculo);
+		return new VehicleRegistration(0L, tiempoIngreso, tiempoSalida, placa, marca,  modelo, color, this.tipoVehiculo);
 	}
 }

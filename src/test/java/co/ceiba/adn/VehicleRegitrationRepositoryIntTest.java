@@ -1,6 +1,5 @@
 package co.ceiba.adn;
 
-
 import static org.junit.Assert.assertFalse;
 
 import java.util.List;
@@ -12,18 +11,19 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import co.ceiba.adn.domain.dao.ParkingConsult;
-import co.ceiba.adn.domain.model.VehicleType;
+import co.ceiba.adn.domain.model.VehicleRegistration;
 
 @RunWith(SpringRunner.class)
 @DataJpaTest
-public class VehicleTypeRepositoryIntegrationTest {
-
-    @Autowired
-    private ParkingConsult vehicleRepository;
-
+public class VehicleRegitrationRepositoryIntTest {
+	
+	@Autowired
+	ParkingConsult parkingConsult;
+	
     @Test
-    public void debeRetornarLosTiposDeVehiculos() {
-        List<VehicleType> vehiculeTypes = vehicleRepository.list();
-        assertFalse(vehiculeTypes.isEmpty());
+    public void debeRetornarLosVehiculosParqueados() {
+        List<VehicleRegistration> vehiculosParqueados = parkingConsult.listParked(0L);
+        assertFalse(vehiculosParqueados.isEmpty());
     }
+
 }
