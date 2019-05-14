@@ -11,6 +11,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import co.ceiba.adn.domain.businessrules.CheckInBusinessRules;
 import co.ceiba.adn.domain.exception.ConfigurationException;
+import co.ceiba.adn.domain.exception.VehicleRegistrationException;
 import co.ceiba.adn.domain.model.VehicleRegistration;
 
 @RunWith(SpringRunner.class)
@@ -34,46 +35,35 @@ public class CheckInBusinessRulesTest {
 	}
 	
 	@Test
-	public void siPlacaEmpiezaPorLaLetraConfiguradaYEsElDiaCorrectoEntoncesRetornaVerdadero() {
+	public void siPlacaEmpiezaPorLaLetraConfiguradaYEsElDiaCorrectoEntoncesContinua() {
 		VehicleRegistration registroVehiculo = new VehicleRegistrationBuilder().conPlacaCorrecta().conDiaCorrecto().build();
-		assertTrue(businessRules.checkVehiclePlate(registroVehiculo));
+		businessRules.checkVehiclePlate(registroVehiculo);
 	}
 	
-	@Test
-	public void siPlacaNoEmpiezaPorLaLetraConfiguradaRetornaVerdadero() {
-		VehicleRegistration registroVehiculo = new VehicleRegistrationBuilder().conPlacaErrada().build();
-		assertTrue(businessRules.checkVehiclePlate(registroVehiculo));
-	}
-	
-	@Test
-	public void siPlacaEmpiezaPorLaLetraConfiguradaYNOEsElDiaCorrectoEntoncesRetornaFalso() {
+
+	@Test(expected = VehicleRegistrationException.class)
+	public void siPlacaEmpiezaPorLaLetraConfiguradaYNOEsElDiaCorrectoEntoncesRetornaError() {
 		VehicleRegistration registroVehiculo = new VehicleRegistrationBuilder().conPlacaCorrecta().conDiaIncorrecto().build();
-		assertFalse(businessRules.checkVehiclePlate(registroVehiculo));
+		businessRules.checkVehiclePlate(registroVehiculo);
 	}
 	
 	@Test
-	public void siPlacaNOEmpiezaPorLaLetraConfiguradaYNOEsElDiaCorrectoEntoncesRetornaFalso() {
-		VehicleRegistration registroVehiculo = new VehicleRegistrationBuilder().conPlacaErrada().conDiaCorrecto().build();
-		assertTrue(businessRules.checkVehiclePlate(registroVehiculo));
-	}
-	
-	@Test
-	public void debeRetornarValorCarros() throws ConfigurationException {
+	public void debeRetornarValorCarros() {
 		assertTrue(businessRules.getMaxCars("20") > 0);
 	}
 	
 	@Test
-	public void debeRetornarValorMotos() throws ConfigurationException {
+	public void debeRetornarValorMotos() {
 		assertTrue(businessRules.getMaxBikes("10") > 0);		
 	}
 	
 	@Test(expected = ConfigurationException.class)
-	public void debeRetornarExcepcion() throws ConfigurationException {
+	public void debeRetornarExcepcion() {
 		businessRules.getMaxCars(null);
 	}
 	
 	@Test(expected = ConfigurationException.class)
-	public void debeRetornarExcepcions() throws ConfigurationException {
+	public void debeRetornarExcepcions() {
 		businessRules.getMaxBikes(null);		
 	}	
 }

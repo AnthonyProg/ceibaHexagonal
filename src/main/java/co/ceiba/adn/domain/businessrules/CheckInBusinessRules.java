@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
 
 import co.ceiba.adn.domain.dao.ParkingConsult;
 import co.ceiba.adn.domain.exception.ConfigurationException;
+import co.ceiba.adn.domain.exception.VehicleRegistrationException;
 import co.ceiba.adn.domain.model.VehicleRegistration;
 import co.ceiba.adn.domain.model.VehicleType;
 
@@ -26,22 +27,21 @@ public class CheckInBusinessRules {
 		return parkingConsult.list().contains(vehicleRegistration.getVehicleType());
 	}
 	
-	public boolean checkVehiclePlate(VehicleRegistration vehicleRegistration) {
+	public void checkVehiclePlate(VehicleRegistration vehicleRegistration) {
 		String letter = systemConfigurations.getProperty("config.letter");		
 		int dayOfWeek = Instant.ofEpochMilli(vehicleRegistration.getCheckInTimeStamp()).atZone(ZoneId.systemDefault()).toLocalDate().getDayOfWeek().getValue();		
 		List<String> daysAllowed = Arrays.asList(systemConfigurations.getProperty("config.days").split(","));
-		if(!vehicleRegistration.getVehiclePlate().startsWith(letter)) {
-			return true;
-		}
-		return vehicleRegistration.getVehiclePlate().startsWith(letter) && daysAllowed.contains(String.valueOf(dayOfWeek)); 
+		if(vehicleRegistration.getVehiclePlate().startsWith(letter) && !daysAllowed.contains(String.valueOf(dayOfWeek))) {
+			throw new VehicleRegistrationException("NO tiene permitido el ingreso.");
+		}		 
 	}
 	
-	public boolean checkAvailableSpace(VehicleRegistration vehicleRegistration) throws ConfigurationException{
+	public boolean checkAvailableSpace(VehicleRegistration vehicleRegistration){
 		long occupied = getOccupiedPlaces(vehicleRegistration);		
 		return getMaxCars(systemConfigurations.getProperty("config.max-cars")) != occupied || getMaxBikes(systemConfigurations.getProperty("config.max-bikes")) != occupied;
 	}
 	
-	public int getMaxCars(String value) throws ConfigurationException {
+	public int getMaxCars(String value) {
 		try {
 			return Integer.parseInt(value);
 		}catch(Exception ex) {
@@ -49,7 +49,7 @@ public class CheckInBusinessRules {
 		}		
 	}
 	
-	public int getMaxBikes(String value) throws ConfigurationException {
+	public int getMaxBikes(String value) {
 		try {
 			return Integer.parseInt(value);
 		}catch(Exception ex) {

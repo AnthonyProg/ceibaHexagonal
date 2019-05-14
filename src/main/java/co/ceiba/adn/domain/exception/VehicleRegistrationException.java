@@ -7,4 +7,8 @@ public class VehicleRegistrationException extends RuntimeException {
 	public VehicleRegistrationException(String message, Throwable error) {
 		super(message, error);
 	}
+	public VehicleRegistrationException(String message) {
+		super(message);
+	}
+	
 }
