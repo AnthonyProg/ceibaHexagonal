@@ -52,8 +52,8 @@ public class CheckInBusinessRulesTest {
 	}
 	
 	@Test
-	public void siPlacaNOEmpiezaPorLaLetraConfiguradaYNOEsElDiaCorrectoEntoncesRetornaFalso() {
-		VehicleRegistration registroVehiculo = new VehicleRegistrationBuilder().conPlacaErrada().conDiaIncorrecto().build();
+	public void siPlacaNOEmpiezaPorLaLetraConfiguradaYEsElDiaCorrectoEntoncesRetornaFalso() {
+		VehicleRegistration registroVehiculo = new VehicleRegistrationBuilder().conPlacaErrada().conDiaCorrecto().build();
 		assertTrue(businessRules.checkVehiclePlate(registroVehiculo));
 	}
 	
