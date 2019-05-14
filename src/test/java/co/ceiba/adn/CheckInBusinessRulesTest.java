@@ -48,6 +48,12 @@ public class CheckInBusinessRulesTest {
 	}
 	
 	@Test
+	public void siPlacaNOEmpiezaPorLaLetraConfiguradaEntoncesContinua() {
+		VehicleRegistration registroVehiculo = new VehicleRegistrationBuilder().conPlacaErrada().build();
+		businessRules.checkVehiclePlate(registroVehiculo);
+	}
+	
+	@Test
 	public void debeRetornarValorCarros() {
 		assertTrue(businessRules.getMaxCars("20") > 0);
 	}
