@@ -2,6 +2,7 @@ package co.ceiba.adn.domain.businessrules;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
@@ -23,9 +24,11 @@ public class CheckInBusinessRules {
 	private ParkingConsult parkingConsult;
 	
 	public void checkVehicleType(VehicleRegistration vehicleRegistration) {
-		if(!parkingConsult.list().contains(vehicleRegistration.getVehicleType())) {
-			throw new VehicleRegistrationException("Tipo de Vehiculo no permitido");
-		}
+		Optional<Vehicle> result = parkingConsult.list().stream().filter(s -> s.getType()
+				.equals(vehicleRegistration.getVehicleType().getType())).findFirst();
+		if(!result.isPresent()) {
+			throw new VehicleRegistrationException("tipo de vehiculo no permitido");
+		}	
 	}
 	
 	public void checkVehiclePlate(VehicleRegistration vehicleRegistration) {
