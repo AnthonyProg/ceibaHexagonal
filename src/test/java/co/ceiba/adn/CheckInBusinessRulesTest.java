@@ -33,6 +33,19 @@ public class CheckInBusinessRulesTest {
 	}
 	
 	@Test(expected = VehicleRegistrationException.class)
+	public void debeRetornarErrorSiNoHayMasEspacioParaMoto() {
+		VehicleRegistration regitroVehiculo = new VehicleRegistrationBuilder().moto().build();
+		businessRules.getOccupiedPlaces(regitroVehiculo);
+	}
+	
+	@Test(expected = VehicleRegistrationException.class)
+	public void debeRetornarErrorSiNoHayMasEspacioParaCarro() {
+		VehicleRegistration regitroVehiculo = new VehicleRegistrationBuilder().carro().build();
+		businessRules.getOccupiedPlaces(regitroVehiculo);
+	}
+	
+	
+	@Test(expected = VehicleRegistrationException.class)
 	public void siTipoVehiculoEsIncorrectoEntoncesRetornaError() {
 		VehicleRegistration regitroVehiculo = new VehicleRegistrationBuilder().conTipoDeVehiculoErrado().build();
 		businessRules.checkVehicleType(regitroVehiculo);

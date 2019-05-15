@@ -14,6 +14,11 @@ public class Vehicle {
 		this.domainType = domainType;
 	}
 	
+	public Vehicle(long domainTypeId , String domainType) {
+		this.domainType = domainType;
+		this.domainTypeId = domainTypeId;
+	}
+	
 	
 
 	public Vehicle(long domainTypeId, String domainType, String domainBrand, String domainModel,
