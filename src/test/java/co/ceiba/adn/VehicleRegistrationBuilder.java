@@ -21,12 +21,12 @@ public class VehicleRegistrationBuilder {
 	}
 	
 	public VehicleRegistrationBuilder moto() {		
-		this.tipoVehiculo = new Vehicle(1L,"MOTO");		
+		this.tipoVehiculo = new Vehicle(1,"MOTO");		
 		return this;
 	}
 	
 	public VehicleRegistrationBuilder carro() {		
-		this.tipoVehiculo = new Vehicle(0L,"CARRO");
+		this.tipoVehiculo = new Vehicle(0,"CARRO");
 		return this;
 	}
 	

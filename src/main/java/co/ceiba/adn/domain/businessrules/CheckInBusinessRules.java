@@ -48,7 +48,7 @@ public class CheckInBusinessRules {
 				&& occupied >= maxCars) {
 			throw new VehicleRegistrationException("Maximo de carros alcanzado");
 		}
-		if(vehicleRegistration.getDomainVehicleType().getDomainTypeId() == VehicleTypesEnum.CAR.ordinal()
+		if(vehicleRegistration.getDomainVehicleType().getDomainTypeId() == VehicleTypesEnum.BIKE.ordinal()
 				&& occupied >= maxBikes) {
 			throw new VehicleRegistrationException("Maximo de motos alcanzado");
 		}		

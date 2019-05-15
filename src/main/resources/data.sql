@@ -1,9 +1,29 @@
-INSERT INTO vehicletype (vehicle_type) VALUES
-  ('CARRO'),
-  ('MOTO');
+INSERT INTO vehicletype (id, vehicle_type) VALUES
+  (0,'CARRO'),
+  (1,'MOTO');
   
 INSERT INTO vehicle_registration (check_in_time,check_out_time,vehicle_plate,status,vehicle_type)
 VALUES  
+  (current_timestamp(),current_timestamp(),'AAAAAA',0,0),
+  (current_timestamp(),current_timestamp(),'AAAAAA',0,0),
+  (current_timestamp(),current_timestamp(),'AAAAAA',0,0),
+  (current_timestamp(),current_timestamp(),'AAAAAA',0,0),
+  (current_timestamp(),current_timestamp(),'AAAAAA',0,0),
+  (current_timestamp(),current_timestamp(),'AAAAAA',0,0),
+  (current_timestamp(),current_timestamp(),'AAAAAA',0,0),
+  (current_timestamp(),current_timestamp(),'AAAAAA',0,0),
+  (current_timestamp(),current_timestamp(),'AAAAAA',0,0),
+  (current_timestamp(),current_timestamp(),'AAAAAA',0,0),
+  (current_timestamp(),current_timestamp(),'AAAAAA',0,0),
+  (current_timestamp(),current_timestamp(),'AAAAAA',0,0),
+  (current_timestamp(),current_timestamp(),'AAAAAA',0,0),
+  (current_timestamp(),current_timestamp(),'AAAAAA',0,0),
+  (current_timestamp(),current_timestamp(),'AAAAAA',0,0),
+  (current_timestamp(),current_timestamp(),'AAAAAA',0,0),
+  (current_timestamp(),current_timestamp(),'AAAAAA',0,0),
+  (current_timestamp(),current_timestamp(),'AAAAAA',0,0),
+  (current_timestamp(),current_timestamp(),'AAAAAA',0,0),
+  (current_timestamp(),current_timestamp(),'AAAAAA',0,0),
   (current_timestamp(),current_timestamp(),'AAAAAA',0,1),
   (current_timestamp(),current_timestamp(),'AAAAAA',0,1),
   (current_timestamp(),current_timestamp(),'AAAAAA',0,1),
@@ -13,24 +33,4 @@ VALUES
   (current_timestamp(),current_timestamp(),'AAAAAA',0,1),
   (current_timestamp(),current_timestamp(),'AAAAAA',0,1),
   (current_timestamp(),current_timestamp(),'AAAAAA',0,1),
-  (current_timestamp(),current_timestamp(),'AAAAAA',0,1),
-  (current_timestamp(),current_timestamp(),'AAAAAA',0,1),
-  (current_timestamp(),current_timestamp(),'AAAAAA',0,1),
-  (current_timestamp(),current_timestamp(),'AAAAAA',0,1),
-  (current_timestamp(),current_timestamp(),'AAAAAA',0,1),
-  (current_timestamp(),current_timestamp(),'AAAAAA',0,1),
-  (current_timestamp(),current_timestamp(),'AAAAAA',0,1),
-  (current_timestamp(),current_timestamp(),'AAAAAA',0,1),
-  (current_timestamp(),current_timestamp(),'AAAAAA',0,1),
-  (current_timestamp(),current_timestamp(),'AAAAAA',0,1),
-  (current_timestamp(),current_timestamp(),'AAAAAA',0,1),
-  (current_timestamp(),current_timestamp(),'AAAAAA',0,2),
-  (current_timestamp(),current_timestamp(),'AAAAAA',0,2),
-  (current_timestamp(),current_timestamp(),'AAAAAA',0,2),
-  (current_timestamp(),current_timestamp(),'AAAAAA',0,2),
-  (current_timestamp(),current_timestamp(),'AAAAAA',0,2),
-  (current_timestamp(),current_timestamp(),'AAAAAA',0,2),
-  (current_timestamp(),current_timestamp(),'AAAAAA',0,2),
-  (current_timestamp(),current_timestamp(),'AAAAAA',0,2),
-  (current_timestamp(),current_timestamp(),'AAAAAA',0,2),
-  (current_timestamp(),current_timestamp(),'AAAAAA',0,2);
+  (current_timestamp(),current_timestamp(),'AAAAAA',0,1);
