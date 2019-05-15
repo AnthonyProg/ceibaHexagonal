@@ -1,5 +1,7 @@
 package co.ceiba.adn.infrastructure.entities;
 
+import java.time.LocalDateTime;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -20,38 +22,29 @@ public class VehicleRegistrationEntity {
 	long id;
 	
 	@Column(name = "check_in_time")	
-	long checkInTimeStamp;	
+	LocalDateTime checkInTimeStamp;	
 	
 	@Column(name = "check_out_time")
-	long checkOutTimeStamp;
+	LocalDateTime checkOutTimeStamp;
 	
 	@Column(name = "vehicle_plate")
 	String vehiclePlate;
 	
-	@Column(name = "brand")
-	String brand;
-	
-	@Column(name = "model")
-	String model;
-	
-	@Column(name = "color")
-	String color;	
+	@Column(name = "status")
+	int status;
 	
 	@ManyToOne(fetch=FetchType.EAGER)
     @JoinColumn(name="vehicle_type")
-	VehicleTypeEntity vehicleType;
+	VehicleEntity vehicleType;
 	
-	public VehicleRegistrationEntity() {}	
-	
-	
-	public VehicleRegistrationEntity(long checkInTimeStamp, long checkOutTimeStamp, String vehiclePlate, String brand,
-			String model, String color, VehicleTypeEntity vehicleType) {		
+	public VehicleRegistrationEntity() {}
+
+	public VehicleRegistrationEntity(LocalDateTime checkInTimeStamp, LocalDateTime checkOutTimeStamp,
+			String vehiclePlate, int status, VehicleEntity vehicleType) {
 		this.checkInTimeStamp = checkInTimeStamp;
 		this.checkOutTimeStamp = checkOutTimeStamp;
 		this.vehiclePlate = vehiclePlate;
-		this.brand = brand;
-		this.model = model;
-		this.color = color;
+		this.status = status;
 		this.vehicleType = vehicleType;
 	}
 
@@ -59,11 +52,11 @@ public class VehicleRegistrationEntity {
 		return id;
 	}
 
-	public long getCheckInTimeStamp() {
+	public LocalDateTime getCheckInTimeStamp() {
 		return checkInTimeStamp;
 	}
 
-	public long getCheckOutTimeStamp() {
+	public LocalDateTime getCheckOutTimeStamp() {
 		return checkOutTimeStamp;
 	}
 
@@ -71,20 +64,11 @@ public class VehicleRegistrationEntity {
 		return vehiclePlate;
 	}
 
-	public String getBrand() {
-		return brand;
+	public int getStatus() {
+		return status;
 	}
 
-	public String getModel() {
-		return model;
-	}
-
-	public String getColor() {
-		return color;
-	}
-
-	public VehicleTypeEntity getVehicleType() {
+	public VehicleEntity getVehicleType() {
 		return vehicleType;
 	}
-	
 }

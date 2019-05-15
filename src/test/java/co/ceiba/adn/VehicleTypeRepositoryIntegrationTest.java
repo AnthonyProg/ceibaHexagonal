@@ -12,7 +12,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import co.ceiba.adn.domain.dao.ParkingConsult;
-import co.ceiba.adn.domain.model.VehicleType;
+import co.ceiba.adn.domain.model.Vehicle;
 
 @RunWith(SpringRunner.class)
 @DataJpaTest
@@ -23,7 +23,7 @@ public class VehicleTypeRepositoryIntegrationTest {
 
     @Test
     public void debeRetornarLosTiposDeVehiculos() {
-        List<VehicleType> vehiculeTypes = vehicleRepository.list();
+        List<Vehicle> vehiculeTypes = vehicleRepository.list();
         assertFalse(vehiculeTypes.isEmpty());
     }
 }

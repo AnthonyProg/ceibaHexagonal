@@ -1,7 +1,5 @@
 package co.ceiba.adn.domain.businessrules;
 
-import java.time.Instant;
-import java.time.ZoneId;
 import java.util.Arrays;
 import java.util.List;
 
@@ -12,8 +10,9 @@ import org.springframework.stereotype.Component;
 import co.ceiba.adn.domain.dao.ParkingConsult;
 import co.ceiba.adn.domain.exception.ConfigurationException;
 import co.ceiba.adn.domain.exception.VehicleRegistrationException;
+import co.ceiba.adn.domain.model.RegistrationStatusEnum;
+import co.ceiba.adn.domain.model.Vehicle;
 import co.ceiba.adn.domain.model.VehicleRegistration;
-import co.ceiba.adn.domain.model.VehicleType;
 
 @Component
 public class CheckInBusinessRules {
@@ -23,42 +22,42 @@ public class CheckInBusinessRules {
 	@Autowired
 	private ParkingConsult parkingConsult;
 	
-	public boolean checkVehicleType(VehicleRegistration vehicleRegistration) {
-		return parkingConsult.list().contains(vehicleRegistration.getVehicleType());
+	public void checkVehicleType(VehicleRegistration vehicleRegistration) {
+		if(!parkingConsult.list().contains(vehicleRegistration.getVehicleType())) {
+			throw new VehicleRegistrationException("Tipo de Vehiculo no permitido");
+		}
 	}
 	
 	public void checkVehiclePlate(VehicleRegistration vehicleRegistration) {
 		String letter = systemConfigurations.getProperty("config.letter");		
-		int dayOfWeek = Instant.ofEpochMilli(vehicleRegistration.getCheckInTimeStamp()).atZone(ZoneId.systemDefault()).toLocalDate().getDayOfWeek().getValue();		
+		int dayOfWeek = vehicleRegistration.getCheckInTimeStamp().getDayOfWeek().getValue();		
 		List<String> daysAllowed = Arrays.asList(systemConfigurations.getProperty("config.days").split(","));
 		if(vehicleRegistration.getVehiclePlate().startsWith(letter) && !daysAllowed.contains(String.valueOf(dayOfWeek))) {
 			throw new VehicleRegistrationException("NO tiene permitido el ingreso.");
 		}		 
 	}
 	
-	public boolean checkAvailableSpace(VehicleRegistration vehicleRegistration){
+	public void checkAvailableSpace(VehicleRegistration vehicleRegistration){
 		long occupied = getOccupiedPlaces(vehicleRegistration);		
-		return getMaxCars(systemConfigurations.getProperty("config.max-cars")) != occupied || getMaxBikes(systemConfigurations.getProperty("config.max-bikes")) != occupied;
+		
 	}
 	
-	public int getMaxCars(String value) {
-		try {
-			return Integer.parseInt(value);
-		}catch(Exception ex) {
-			throw new ConfigurationException("Configuracion no disponible", ex);
-		}		
+	public int getMaxCars() {
+		if(systemConfigurations.getProperty("config.max-cars") == null) {
+			throw new ConfigurationException("Configuracion no disponible");
+		}
+		return Integer.parseInt(systemConfigurations.getProperty("config.max-cars"));
 	}
 	
-	public int getMaxBikes(String value) {
-		try {
-			return Integer.parseInt(value);
-		}catch(Exception ex) {
-			throw new ConfigurationException("Configuracion no disponible", ex);
-		}		
+	public int getMaxBikes() {
+		if(systemConfigurations.getProperty("config.max-bikes") == null) {
+			throw new ConfigurationException("Configuracion no disponible");
+		}
+		return Integer.parseInt(systemConfigurations.getProperty("config.max-bikes"));		
 	}
 	
 	public long getOccupiedPlaces(VehicleRegistration vehicleRegistration) {
-		VehicleType vehicleType = vehicleRegistration.getVehicleType();
-		return parkingConsult.listParked(0L).stream().filter(type -> type.getVehicleType().equals(vehicleType)).count();
+		Vehicle vehicleType = vehicleRegistration.getVehicleType();
+		return parkingConsult.listParked(RegistrationStatusEnum.PARKED.ordinal()).stream().filter(type -> type.getVehicleType().equals(vehicleType)).count();
 	}
 }

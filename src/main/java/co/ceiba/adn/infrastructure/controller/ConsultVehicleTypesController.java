@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import co.ceiba.adn.application.services.ConsultVehicleTypesService;
-import co.ceiba.adn.domain.model.VehicleType;
+import co.ceiba.adn.domain.model.Vehicle;
 
 @RestController
 public class ConsultVehicleTypesController {
@@ -16,7 +16,7 @@ public class ConsultVehicleTypesController {
 
     @RequestMapping(value="/types")
     @ResponseBody
-    public Iterable<VehicleType> loadVehicleTypes() {
+    public Iterable<Vehicle> loadVehicleTypes() {
         return vehiculesTypesManager.loadAll();
     }
 

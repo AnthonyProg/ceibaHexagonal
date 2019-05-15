@@ -1,30 +1,32 @@
 package co.ceiba.adn;
 
 import co.ceiba.adn.domain.model.VehicleRegistration;
-import co.ceiba.adn.domain.model.VehicleType;
+
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
+
+import co.ceiba.adn.domain.model.Vehicle;
 
 public class VehicleRegistrationBuilder {
 	
-	VehicleType tipoVehiculo = new VehicleType();
-	long tiempoIngreso;
-	long tiempoSalida;
+	Vehicle tipoVehiculo = new Vehicle();
+	LocalDateTime tiempoIngreso = LocalDateTime.now();
+	LocalDateTime tiempoSalida;
 	String placa = "";
-	String modelo = "Cualquiera";
-	String color = "Amarillo";
-	String marca = "Toyota";
+	int status = 1;
 		
 	public VehicleRegistrationBuilder conTipoDeVehiculoErrado() {		
-		this.tipoVehiculo = new VehicleType("AVION");
+		this.tipoVehiculo = new Vehicle("AVION");
 		return this;
 	}
 	
 	public VehicleRegistrationBuilder moto() {		
-		this.tipoVehiculo = new VehicleType("MOTO");;
+		this.tipoVehiculo = new Vehicle("MOTO");
 		return this;
 	}
 	
 	public VehicleRegistrationBuilder carro() {		
-		this.tipoVehiculo = new VehicleType("CARRO");
+		this.tipoVehiculo = new Vehicle("CARRO");
 		return this;
 	}
 	
@@ -39,17 +41,17 @@ public class VehicleRegistrationBuilder {
 	}
 	
 	public VehicleRegistrationBuilder conDiaIncorrecto() {		
-		this.tiempoIngreso = 1557530951000L;
+		this.tiempoIngreso = LocalDateTime.now();
 		return this;
 	}
 	
 	public VehicleRegistrationBuilder conDiaCorrecto() {		
-		this.tiempoIngreso = 1557703751000L;
+		this.tiempoIngreso = LocalDateTime.now().minus(2, ChronoUnit.DAYS);
 		return this;
 	}	
 	
 	
 	public VehicleRegistration build() {
-		return new VehicleRegistration(0L, tiempoIngreso, tiempoSalida, placa, marca,  modelo, color, this.tipoVehiculo);
+		return new VehicleRegistration(0L, tiempoIngreso, tiempoSalida, placa , status , tipoVehiculo);
 	}
 }

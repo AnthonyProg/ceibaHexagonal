@@ -12,18 +12,15 @@ public class VehicleParkingRegistration implements ParkingRegitration {
 	
 	private VehicleRegistrationRepositoryJPA vehiculeRegistrationRepository;
 	
-	private Mapper mapper;
-	
 	@Autowired
 	public VehicleParkingRegistration(VehicleRegistrationRepositoryJPA vehiculeRegistrationRepository) {
 		this.vehiculeRegistrationRepository = vehiculeRegistrationRepository;
-		this.mapper = new Mapper();
 	}
 
 	@Override
-	public VehicleRegistration register(VehicleRegistration vehicleRegistration) {
-		VehicleRegistrationEntity entity = mapper.convertToEntityRegistration(vehicleRegistration);
-		return mapper.convertToDomainRegistration(vehiculeRegistrationRepository.save(entity));		 
+	public void register(VehicleRegistration vehicleRegistration) {
+		VehicleRegistrationEntity entity = Mapper.convertToEntityRegistration(vehicleRegistration);
+		vehiculeRegistrationRepository.save(entity);		 
 	}
 
 }

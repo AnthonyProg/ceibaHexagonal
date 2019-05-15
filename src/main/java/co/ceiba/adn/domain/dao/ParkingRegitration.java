@@ -10,6 +10,6 @@ public interface ParkingRegitration {
 	 * @return void
 	 * @throws VehicleRegistrationException
 	 */
-	VehicleRegistration register(VehicleRegistration vehicleRegistration) throws VehicleRegistrationException;
+	void register(VehicleRegistration vehicleRegistration);
 
 }

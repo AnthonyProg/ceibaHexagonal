@@ -3,7 +3,7 @@ package co.ceiba.adn.domain.dao;
 import java.util.List;
 
 import co.ceiba.adn.domain.model.VehicleRegistration;
-import co.ceiba.adn.domain.model.VehicleType;
+import co.ceiba.adn.domain.model.Vehicle;
 
 
 public interface ParkingConsult {
@@ -12,7 +12,7 @@ public interface ParkingConsult {
 	 * Permite listar los tipos de vehiculos
 	 * @return los tipos de vehiculos
 	 */
-	List<VehicleType> list();
+	List<Vehicle> list();
 	
 	/**
 	 * Permite listar todos los registros del parqueadero que no tengan registro de
@@ -20,6 +20,6 @@ public interface ParkingConsult {
 	 * 
 	 * @return los registros del parqueadero
 	 */
-	List<VehicleRegistration> listParked(long timeStamp);
+	List<VehicleRegistration> listParked(int status);
 
 }

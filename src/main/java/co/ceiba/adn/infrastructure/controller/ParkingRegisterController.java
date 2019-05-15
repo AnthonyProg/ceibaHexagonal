@@ -18,7 +18,7 @@ public class ParkingRegisterController {
 	
 	@PostMapping(value="/checkin")
     @ResponseBody
-    public VehicleRegistration checkInVehicle(@RequestBody VehicleRegistration vehicleRegistration) throws VehicleRegistrationException {
-        return parkingRegisterManager.checkIn(vehicleRegistration);
+    public void checkInVehicle(@RequestBody VehicleRegistration vehicleRegistration) throws VehicleRegistrationException {
+        parkingRegisterManager.checkIn(vehicleRegistration);
     }
 }

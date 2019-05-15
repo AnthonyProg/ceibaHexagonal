@@ -22,7 +22,7 @@ public class VehicleRegitrationRepositoryIntTest {
 	
     @Test
     public void debeRetornarLosVehiculosParqueados() {
-        List<VehicleRegistration> vehiculosParqueados = parkingConsult.listParked(0L);
+        List<VehicleRegistration> vehiculosParqueados = parkingConsult.listParked(1);
         assertFalse(vehiculosParqueados.isEmpty());
     }
 

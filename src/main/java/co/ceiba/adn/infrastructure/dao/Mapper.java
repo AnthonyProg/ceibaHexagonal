@@ -1,50 +1,42 @@
 package co.ceiba.adn.infrastructure.dao;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
+import co.ceiba.adn.domain.model.Vehicle;
 import co.ceiba.adn.domain.model.VehicleRegistration;
-import co.ceiba.adn.domain.model.VehicleType;
+import co.ceiba.adn.infrastructure.entities.VehicleEntity;
 import co.ceiba.adn.infrastructure.entities.VehicleRegistrationEntity;
-import co.ceiba.adn.infrastructure.entities.VehicleTypeEntity;
 
-public class Mapper {
+public final class Mapper {
 	
-	public List<VehicleType> converToDomainVehicleType(List<VehicleTypeEntity> vehicleTypeEntities){		
-		List<VehicleType> returnedList = new ArrayList<>();
-		for(VehicleTypeEntity entity : vehicleTypeEntities) {
-			VehicleType vehicleType = new VehicleType(entity.getId(), entity.getType());			
-			returnedList.add(vehicleType);
-		}
-		return returnedList;
+	
+	private Mapper() {}
+	
+	public static List<Vehicle> converToDomainVehicleType(List<VehicleEntity> vehicleTypeEntities){		
+		return vehicleTypeEntities.stream().map(Mapper::convertToDomainType).collect(Collectors.toList());
 	}
 	
-	public List<VehicleRegistration> converToDomainRegistrationType(List<VehicleRegistrationEntity> registrationEntities){		
-		List<VehicleRegistration> returnedList = new ArrayList<>();
-		for(VehicleRegistrationEntity entity : registrationEntities) {
-			VehicleRegistration vehicleRegistration = 
-					new VehicleRegistration(entity.getId(), entity.getCheckInTimeStamp(), entity.getCheckOutTimeStamp(),entity.getVehiclePlate(), entity.getBrand(), entity.getModel(), entity.getColor(), convertToDomainType(entity.getVehicleType()));
-			returnedList.add(vehicleRegistration);
-		}
-		return returnedList;
+	public static List<VehicleRegistration> converToDomainRegistrationType(List<VehicleRegistrationEntity> registrationEntities){		
+		return registrationEntities.stream().map(Mapper::convertToDomainRegistration).collect(Collectors.toList());
 	}
 	
-	public VehicleRegistrationEntity convertToEntityRegistration(VehicleRegistration vehicleRegistration) {
+	public static VehicleRegistrationEntity convertToEntityRegistration(VehicleRegistration vehicleRegistration) {
 		return new VehicleRegistrationEntity(vehicleRegistration.getCheckInTimeStamp(), vehicleRegistration.getCheckOutTimeStamp()
-				, vehicleRegistration.getVehiclePlate(), vehicleRegistration.getBrand(), vehicleRegistration.getModel(), vehicleRegistration.getColor(), convertToEntityType(vehicleRegistration.getVehicleType()));
+				, vehicleRegistration.getVehiclePlate(), vehicleRegistration.getStatus(), convertToEntityType(vehicleRegistration.getVehicleType()));
 	}
 	
-	public VehicleRegistration convertToDomainRegistration(VehicleRegistrationEntity vehicleRegistration) {		
+	public static VehicleRegistration convertToDomainRegistration(VehicleRegistrationEntity vehicleRegistration) {		
 		return new VehicleRegistration(vehicleRegistration.getId(), vehicleRegistration.getCheckInTimeStamp(), vehicleRegistration.getCheckOutTimeStamp()
-				, vehicleRegistration.getVehiclePlate(), vehicleRegistration.getBrand(), vehicleRegistration.getModel(), vehicleRegistration.getColor(), convertToDomainType(vehicleRegistration.getVehicleType()));
+				, vehicleRegistration.getVehiclePlate(), vehicleRegistration.getStatus(), convertToDomainType(vehicleRegistration.getVehicleType()));
 	}
 	
-	public VehicleTypeEntity convertToEntityType(VehicleType vehicleType) {		
-		return new VehicleTypeEntity(vehicleType.getId(), vehicleType.getType());
+	public static VehicleEntity convertToEntityType(Vehicle vehicleType) {		
+		return new VehicleEntity(vehicleType.getType(), vehicleType.getBrand(), vehicleType.getModel(), vehicleType.getCubicCapacity());
 	}
 	
-	public VehicleType convertToDomainType(VehicleTypeEntity entity) {		
-		return new VehicleType(entity.getId(), entity.getType());
+	public static Vehicle convertToDomainType(VehicleEntity entity) {		
+		return new Vehicle(entity.getId(), entity.getType(), entity.getBrand(), entity.getModel(), entity.getCubicCapacity());
 	}
 
 }

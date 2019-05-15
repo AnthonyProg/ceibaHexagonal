@@ -10,6 +10,6 @@ import co.ceiba.adn.infrastructure.entities.VehicleRegistrationEntity;
 @Repository
 public interface VehicleRegistrationRepositoryJPA extends JpaRepository<VehicleRegistrationEntity, Long> {
 	    
-	public List<VehicleRegistrationEntity> findByCheckOutTimeStamp(long checkOutTimeStamp);
+	public List<VehicleRegistrationEntity> findByStatus(int status);
 		
 }

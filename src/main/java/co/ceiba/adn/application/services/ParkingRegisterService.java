@@ -12,10 +12,10 @@ public class ParkingRegisterService {
 	CheckInBusinessRules checkInBusinessRules;	
 	ParkingRegitration parkingRegistration;
 	
-	public VehicleRegistration checkIn(VehicleRegistration vehicleRegistration) {
+	public void checkIn(VehicleRegistration vehicleRegistration) {
 		checkInBusinessRules.checkVehicleType(vehicleRegistration);
 		checkInBusinessRules.checkVehiclePlate(vehicleRegistration);
 		checkInBusinessRules.checkAvailableSpace(vehicleRegistration);
-		return parkingRegistration.register(vehicleRegistration);
+		parkingRegistration.register(vehicleRegistration);
 	}
 }
