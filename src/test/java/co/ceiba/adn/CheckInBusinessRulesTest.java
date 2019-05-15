@@ -44,6 +44,18 @@ public class CheckInBusinessRulesTest {
 		businessRules.checkAvailableSpace(regitroVehiculo);
 	}
 	
+	@Test
+	public void siHayEspacioParaMotosContinua() {
+		VehicleRegistration regitroVehiculo = new VehicleRegistrationBuilder().motoMal().build();
+		businessRules.checkAvailableSpace(regitroVehiculo);
+	}
+	
+	@Test
+	public void siHayEspacioParaCarrosContinua() {
+		VehicleRegistration regitroVehiculo = new VehicleRegistrationBuilder().carroMal().build();
+		businessRules.checkAvailableSpace(regitroVehiculo);
+	}
+	
 	
 	@Test(expected = VehicleRegistrationException.class)
 	public void siTipoVehiculoEsIncorrectoEntoncesRetornaError() {

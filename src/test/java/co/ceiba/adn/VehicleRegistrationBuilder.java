@@ -30,6 +30,16 @@ public class VehicleRegistrationBuilder {
 		return this;
 	}
 	
+	public VehicleRegistrationBuilder motoMal() {		
+		this.tipoVehiculo = new Vehicle(3,"MOTO");		
+		return this;
+	}
+	
+	public VehicleRegistrationBuilder carroMal() {		
+		this.tipoVehiculo = new Vehicle(4,"CARRO");
+		return this;
+	}
+	
 	public VehicleRegistrationBuilder conPlacaErrada() {		
 		this.placa = "BBBBBB";
 		return this;
