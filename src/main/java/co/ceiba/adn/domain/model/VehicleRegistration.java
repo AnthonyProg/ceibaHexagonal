@@ -13,7 +13,7 @@ public class VehicleRegistration {
 
 	public VehicleRegistration(long id, long checkInTimeStamp, long checkOutTimeStamp, String vehiclePlate, String brand,
 			String model, String color, VehicleType vehicleType) {
-		super();
+		this.id = id;
 		this.checkInTimeStamp = checkInTimeStamp;
 		this.checkOutTimeStamp = checkOutTimeStamp;
 		this.vehiclePlate = vehiclePlate;

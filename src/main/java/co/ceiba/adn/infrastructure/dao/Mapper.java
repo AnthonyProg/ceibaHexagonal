@@ -3,8 +3,6 @@ package co.ceiba.adn.infrastructure.dao;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.modelmapper.ModelMapper;
-
 import co.ceiba.adn.domain.model.VehicleRegistration;
 import co.ceiba.adn.domain.model.VehicleType;
 import co.ceiba.adn.infrastructure.entities.VehicleRegistrationEntity;
@@ -32,13 +30,13 @@ public class Mapper {
 	}
 	
 	public VehicleRegistrationEntity convertToEntityRegistration(VehicleRegistration vehicleRegistration) {
-		ModelMapper mapper = new ModelMapper();
-		return mapper.map(vehicleRegistration, VehicleRegistrationEntity.class);
+		return new VehicleRegistrationEntity(vehicleRegistration.getCheckInTimeStamp(), vehicleRegistration.getCheckOutTimeStamp()
+				, vehicleRegistration.getVehiclePlate(), vehicleRegistration.getBrand(), vehicleRegistration.getModel(), vehicleRegistration.getColor(), convertToEntityType(vehicleRegistration.getVehicleType()));
 	}
 	
-	public VehicleRegistration convertToDomainRegistration(VehicleRegistrationEntity entity) {
-		ModelMapper mapper = new ModelMapper();
-		return mapper.map(entity, VehicleRegistration.class);
+	public VehicleRegistration convertToDomainRegistration(VehicleRegistrationEntity vehicleRegistration) {		
+		return new VehicleRegistration(vehicleRegistration.getId(), vehicleRegistration.getCheckInTimeStamp(), vehicleRegistration.getCheckOutTimeStamp()
+				, vehicleRegistration.getVehiclePlate(), vehicleRegistration.getBrand(), vehicleRegistration.getModel(), vehicleRegistration.getColor(), convertToDomainType(vehicleRegistration.getVehicleType()));
 	}
 	
 	public VehicleTypeEntity convertToEntityType(VehicleType vehicleType) {		
