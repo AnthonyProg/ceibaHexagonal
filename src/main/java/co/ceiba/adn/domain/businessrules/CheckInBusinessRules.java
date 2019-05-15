@@ -9,11 +9,11 @@ import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
 
 import co.ceiba.adn.domain.dao.ParkingConsult;
-import co.ceiba.adn.domain.exception.ConfigurationException;
 import co.ceiba.adn.domain.exception.VehicleRegistrationException;
 import co.ceiba.adn.domain.model.RegistrationStatusEnum;
 import co.ceiba.adn.domain.model.Vehicle;
 import co.ceiba.adn.domain.model.VehicleRegistration;
+import co.ceiba.adn.domain.model.VehicleTypesEnum;
 
 @Component
 public class CheckInBusinessRules {
@@ -41,22 +41,17 @@ public class CheckInBusinessRules {
 	}
 	
 	public void checkAvailableSpace(VehicleRegistration vehicleRegistration){
-		long occupied = getOccupiedPlaces(vehicleRegistration);		
-		
-	}
-	
-	public int getMaxCars() {
-		if(systemConfigurations.getProperty("config.max-cars") == null) {
-			throw new ConfigurationException("Configuracion no disponible");
+		long occupied = getOccupiedPlaces(vehicleRegistration);
+		int maxCars = Integer.parseInt(systemConfigurations.getProperty("config.max-cars"));
+		int maxBikes = Integer.parseInt(systemConfigurations.getProperty("config.max-bikes"));
+		if(vehicleRegistration.getDomainVehicleType().getDomainTypeId() == VehicleTypesEnum.CAR.ordinal() 
+				&& occupied >= maxCars) {
+			throw new VehicleRegistrationException("Maximo de carros alcanzado");
 		}
-		return Integer.parseInt(systemConfigurations.getProperty("config.max-cars"));
-	}
-	
-	public int getMaxBikes() {
-		if(systemConfigurations.getProperty("config.max-bikes") == null) {
-			throw new ConfigurationException("Configuracion no disponible");
-		}
-		return Integer.parseInt(systemConfigurations.getProperty("config.max-bikes"));		
+		if(vehicleRegistration.getDomainVehicleType().getDomainTypeId() == VehicleTypesEnum.CAR.ordinal()
+				&& occupied >= maxBikes) {
+			throw new VehicleRegistrationException("Maximo de motos alcanzado");
+		}		
 	}
 	
 	public long getOccupiedPlaces(VehicleRegistration vehicleRegistration) {

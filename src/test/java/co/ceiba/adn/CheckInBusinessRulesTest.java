@@ -50,14 +50,4 @@ public class CheckInBusinessRulesTest {
 		VehicleRegistration registroVehiculo = new VehicleRegistrationBuilder().conPlacaErrada().build();
 		businessRules.checkVehiclePlate(registroVehiculo);
 	}
-	
-	@Test
-	public void debeRetornarValorCarros() {
-		assertTrue(businessRules.getMaxCars() > 0);
-	}
-	
-	@Test
-	public void debeRetornarValorMotos() {
-		assertTrue(businessRules.getMaxBikes() > 0);		
-	}
 }
