@@ -22,8 +22,8 @@ public final class Mapper {
 	}
 	
 	public static VehicleRegistrationEntity convertToEntityRegistration(VehicleRegistration vehicleRegistration) {
-		return new VehicleRegistrationEntity(vehicleRegistration.getCheckInTimeStamp(), vehicleRegistration.getCheckOutTimeStamp()
-				, vehicleRegistration.getVehiclePlate(), vehicleRegistration.getStatus(), convertToEntityType(vehicleRegistration.getVehicleType()));
+		return new VehicleRegistrationEntity(vehicleRegistration.getCheckIn(), vehicleRegistration.getCheckOut()
+				, vehicleRegistration.getDomainVehiclePlate(), vehicleRegistration.getDomainStatus(), convertToEntityType(vehicleRegistration.getDomainVehicleType()));
 	}
 	
 	public static VehicleRegistration convertToDomainRegistration(VehicleRegistrationEntity vehicleRegistration) {		
@@ -32,7 +32,7 @@ public final class Mapper {
 	}
 	
 	public static VehicleEntity convertToEntityType(Vehicle vehicleType) {		
-		return new VehicleEntity(vehicleType.getType(), vehicleType.getBrand(), vehicleType.getModel(), vehicleType.getCubicCapacity());
+		return new VehicleEntity(vehicleType.getDomainType(), vehicleType.getDomainBrand(), vehicleType.getDomainModel(), vehicleType.getDomainCubicCapacity());
 	}
 	
 	public static Vehicle convertToDomainType(VehicleEntity entity) {		

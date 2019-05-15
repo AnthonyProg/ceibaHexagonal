@@ -4,38 +4,44 @@ import java.time.LocalDateTime;
 
 public class VehicleRegistration {
 
-	private long id;
-	private LocalDateTime checkInTimeStamp;
-	private LocalDateTime checkOutTimeStamp;
-	private String vehiclePlate;
-	private int status;
-	private Vehicle vehicleType;
+	private long domainId;
+	private LocalDateTime checkIn;
+	private LocalDateTime checkOut;
+	private String domainVehiclePlate;
+	private int domainStatus;
+	private Vehicle domainVehicleType;
 	
-	public VehicleRegistration(long id, LocalDateTime checkInTimeStamp, LocalDateTime checkOutTimeStamp,
-			String vehiclePlate, int status, Vehicle vehicleType) {		
-		this.id = id;
-		this.checkInTimeStamp = checkInTimeStamp;
-		this.checkOutTimeStamp = checkOutTimeStamp;
-		this.vehiclePlate = vehiclePlate;
-		this.status = status;
-		this.vehicleType = vehicleType;
+	public VehicleRegistration(long domainId, LocalDateTime checkIn, LocalDateTime checkOut, String domainVehiclePlate,
+			int domainStatus, Vehicle domainVehicleType) {
+		this.domainId = domainId;
+		this.checkIn = checkIn;
+		this.checkOut = checkOut;
+		this.domainVehiclePlate = domainVehiclePlate;
+		this.domainStatus = domainStatus;
+		this.domainVehicleType = domainVehicleType;
 	}
-	public long getId() {
-		return id;
+
+	public long getDomainId() {
+		return domainId;
 	}
-	public LocalDateTime getCheckInTimeStamp() {
-		return checkInTimeStamp;
+
+	public LocalDateTime getCheckIn() {
+		return checkIn;
 	}
-	public LocalDateTime getCheckOutTimeStamp() {
-		return checkOutTimeStamp;
+
+	public LocalDateTime getCheckOut() {
+		return checkOut;
 	}
-	public String getVehiclePlate() {
-		return vehiclePlate;
+
+	public String getDomainVehiclePlate() {
+		return domainVehiclePlate;
 	}
-	public int getStatus() {
-		return status;
+
+	public int getDomainStatus() {
+		return domainStatus;
 	}
-	public Vehicle getVehicleType() {
-		return vehicleType;
-	}	
+
+	public Vehicle getDomainVehicleType() {
+		return domainVehicleType;
+	}
 }

@@ -24,8 +24,8 @@ public class CheckInBusinessRules {
 	private ParkingConsult parkingConsult;
 	
 	public void checkVehicleType(VehicleRegistration vehicleRegistration) {
-		Optional<Vehicle> result = parkingConsult.list().stream().filter(s -> s.getType()
-				.equals(vehicleRegistration.getVehicleType().getType())).findFirst();
+		Optional<Vehicle> result = parkingConsult.list().stream().filter(s -> s.getDomainType()
+				.equals(vehicleRegistration.getDomainVehicleType().getDomainType())).findFirst();
 		if(!result.isPresent()) {
 			throw new VehicleRegistrationException("tipo de vehiculo no permitido");
 		}	
@@ -33,9 +33,9 @@ public class CheckInBusinessRules {
 	
 	public void checkVehiclePlate(VehicleRegistration vehicleRegistration) {
 		String letter = systemConfigurations.getProperty("config.letter");		
-		int dayOfWeek = vehicleRegistration.getCheckInTimeStamp().getDayOfWeek().getValue();		
+		int dayOfWeek = vehicleRegistration.getCheckIn().getDayOfWeek().getValue();		
 		List<String> daysAllowed = Arrays.asList(systemConfigurations.getProperty("config.days").split(","));
-		if(vehicleRegistration.getVehiclePlate().startsWith(letter) && !daysAllowed.contains(String.valueOf(dayOfWeek))) {
+		if(vehicleRegistration.getDomainVehiclePlate().startsWith(letter) && !daysAllowed.contains(String.valueOf(dayOfWeek))) {
 			throw new VehicleRegistrationException("NO tiene permitido el ingreso.");
 		}		 
 	}
@@ -60,7 +60,7 @@ public class CheckInBusinessRules {
 	}
 	
 	public long getOccupiedPlaces(VehicleRegistration vehicleRegistration) {
-		Vehicle vehicleType = vehicleRegistration.getVehicleType();
-		return parkingConsult.listParked(RegistrationStatusEnum.PARKED.ordinal()).stream().filter(type -> type.getVehicleType().equals(vehicleType)).count();
+		Vehicle vehicleType = vehicleRegistration.getDomainVehicleType();
+		return parkingConsult.listParked(RegistrationStatusEnum.PARKED.ordinal()).stream().filter(type -> type.getDomainVehicleType().getDomainType().equals(vehicleType.getDomainType())).count();
 	}
 }

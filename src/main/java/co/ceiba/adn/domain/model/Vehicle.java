@@ -2,43 +2,48 @@ package co.ceiba.adn.domain.model;
 
 public class Vehicle {
 	
-	private long id;
-	private String type;	
-	private String brand;
-	private String model;	
-	private String cubicCapacity;
+	private long domainTypeId;
+	private String domainType;	
+	private String domainBrand;
+	private String domainModel;	
+	private String domainCubicCapacity;
 	
 	public Vehicle() {}
 	
-	public Vehicle(String vehicleType) {
-		this.type = vehicleType;
+	public Vehicle(String domainType) {
+		this.domainType = domainType;
+	}
+	
+	
+
+	public Vehicle(long domainTypeId, String domainType, String domainBrand, String domainModel,
+			String domainCubicCapacity) {
+		this.domainTypeId = domainTypeId;
+		this.domainType = domainType;
+		this.domainBrand = domainBrand;
+		this.domainModel = domainModel;
+		this.domainCubicCapacity = domainCubicCapacity;
+	}
+
+	public long getDomainTypeId() {
+		return domainTypeId;
+	}
+
+	public String getDomainType() {
+		return domainType;
+	}
+
+	public String getDomainBrand() {
+		return domainBrand;
+	}
+
+	public String getDomainModel() {
+		return domainModel;
+	}
+
+	public String getDomainCubicCapacity() {
+		return domainCubicCapacity;
 	}	
 	
-	public Vehicle(long id, String type, String brand, String model, String cubicCapacity) {
-		this.id = id;
-		this.type = type;
-		this.brand = brand;
-		this.model = model;
-		this.cubicCapacity = cubicCapacity;
-	}
-
-	public long getId() {
-		return id;
-	}
-
-	public String getType() {
-		return type;
-	}
-
-	public String getBrand() {
-		return brand;
-	}
-
-	public String getModel() {
-		return model;
-	}
-
-	public String getCubicCapacity() {
-		return cubicCapacity;
-	}
+	
 }
