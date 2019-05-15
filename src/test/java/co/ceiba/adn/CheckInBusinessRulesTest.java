@@ -17,8 +17,20 @@ import co.ceiba.adn.domain.model.VehicleRegistration;
 public class CheckInBusinessRulesTest {
 	
 	@Autowired
-	CheckInBusinessRules businessRules;
+	private CheckInBusinessRules businessRules;
+	
 
+	@Test
+	public void debeRetornarElTotalDeCarrosParqueados() {
+		VehicleRegistration regitroVehiculo = new VehicleRegistrationBuilder().carro().build();
+		assertTrue(businessRules.getOccupiedPlaces(regitroVehiculo) > 0);
+	}
+	
+	@Test
+	public void debeRetornarElTotalDeMotosParqueadas() {
+		VehicleRegistration regitroVehiculo = new VehicleRegistrationBuilder().moto().build();
+		assertTrue(businessRules.getOccupiedPlaces(regitroVehiculo) > 0);
+	}
 	
 	@Test(expected = VehicleRegistrationException.class)
 	public void siTipoVehiculoEsIncorrectoEntoncesRetornaError() {

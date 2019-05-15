@@ -11,6 +11,10 @@ public class VehicleRegistration {
 	private int domainStatus;
 	private Vehicle domainVehicleType;
 	
+	public VehicleRegistration() {
+		
+	}
+	
 	public VehicleRegistration(long domainId, LocalDateTime checkIn, LocalDateTime checkOut, String domainVehiclePlate,
 			int domainStatus, Vehicle domainVehicleType) {
 		this.domainId = domainId;
