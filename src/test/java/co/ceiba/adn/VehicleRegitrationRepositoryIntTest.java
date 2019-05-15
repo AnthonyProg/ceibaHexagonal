@@ -11,6 +11,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import co.ceiba.adn.domain.dao.ParkingConsult;
+import co.ceiba.adn.domain.model.RegistrationStatusEnum;
 import co.ceiba.adn.domain.model.VehicleRegistration;
 
 @RunWith(SpringRunner.class)
@@ -22,7 +23,7 @@ public class VehicleRegitrationRepositoryIntTest {
 	
     @Test
     public void debeRetornarLosVehiculosParqueados() {
-        List<VehicleRegistration> vehiculosParqueados = parkingConsult.listParked(1);
+        List<VehicleRegistration> vehiculosParqueados = parkingConsult.listParked(RegistrationStatusEnum.PARKED.ordinal());
         assertFalse(vehiculosParqueados.isEmpty());
     }
 
