@@ -14,18 +14,30 @@ import co.ceiba.adn.domain.model.VehicleTypesEnum;
 @Component
 public class CheckOutBusinessRules {
 
-	@Autowired
+	
 	private ParkingConsult parkingConsult;	
-	@Autowired
 	private Environment systemConfigurations;
-	private double hourValueCar = Double.parseDouble(systemConfigurations.getProperty("config.hour-value-car"));
-	private double hourValueBike = Double.parseDouble(systemConfigurations.getProperty("config.hour-value-bike"));
-	private double dayValueCar = Double.parseDouble(systemConfigurations.getProperty("dayValueCar"));
-	private double dayValueBike = Double.parseDouble(systemConfigurations.getProperty("dayValueBike"));
-	private double maxHours = Double.parseDouble(systemConfigurations.getProperty("config.maxHours"));
-	private double maxCubicCapacity = Double.parseDouble(systemConfigurations.getProperty("config.maxCapacity"));
-	private double capacityFee = Double.parseDouble(systemConfigurations.getProperty("config.extraCapacityFee"));
-		
+	private double hourValueCar;
+	private double hourValueBike;
+	private double dayValueCar;
+	private double dayValueBike;
+	private double maxHours;
+	private double maxCubicCapacity;
+	private double capacityFee;
+	
+	@Autowired
+	public CheckOutBusinessRules(ParkingConsult parkingConsult, Environment config) {
+		this.parkingConsult = parkingConsult;
+		this.systemConfigurations = config;
+		this.hourValueCar = Double.parseDouble(systemConfigurations.getProperty("config.hour-value-car"));
+		this.hourValueBike = Double.parseDouble(systemConfigurations.getProperty("config.hour-value-bike"));
+		this.dayValueCar = Double.parseDouble(systemConfigurations.getProperty("config.day-value-car"));
+		this.dayValueBike = Double.parseDouble(systemConfigurations.getProperty("config.day-value-bike"));
+		this.maxHours = Double.parseDouble(systemConfigurations.getProperty("config.maxHours"));
+		this.maxCubicCapacity = Double.parseDouble(systemConfigurations.getProperty("config.maxCapacity"));
+		this.capacityFee = Double.parseDouble(systemConfigurations.getProperty("config.extraCapacityFee"));		
+	}
+	
 	public VehicleRegistration checkIfRegistrationExists(long id){
 		return parkingConsult.findRegistration(id);
 	}
