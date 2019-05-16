@@ -86,8 +86,8 @@ public class CheckInBusinessRulesTest {
 	}
 	
 	@Test
-	public void siPlacaNOEmpiezaPorLaLetraConfiguradaYEsElDiaCorrectoEntoncesContinua() {
-		VehicleRegistration registroVehiculo = new VehicleRegistrationBuilder().conPlacaErrada().setDate("2019-05-13 12:30").build();
+	public void siPlacaNOEmpiezaPorLaLetraConfiguradaYNOEsElDiaCorrectoEntoncesContinua() {
+		VehicleRegistration registroVehiculo = new VehicleRegistrationBuilder().conPlacaErrada().setDate("2019-05-15 12:30").build();
 		businessRules.checkVehiclePlate(registroVehiculo);
 	}
 	
