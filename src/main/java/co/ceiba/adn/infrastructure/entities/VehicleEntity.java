@@ -30,7 +30,7 @@ public class VehicleEntity implements Serializable {
 	String model;
 	
 	@Column(name = "cubic_capacity")
-	String cubicCapacity;
+	int cubicCapacity;
 	
 	public VehicleEntity() {}
 	
@@ -38,7 +38,7 @@ public class VehicleEntity implements Serializable {
 		this.type = type;
 	}
 
-	public VehicleEntity(String type, String brand, String model, String cubicCapacity) {
+	public VehicleEntity(String type, String brand, String model, int cubicCapacity) {
 		this.type = type;
 		this.brand = brand;
 		this.model = model;
@@ -61,7 +61,7 @@ public class VehicleEntity implements Serializable {
 		return model;
 	}
 
-	public String getCubicCapacity() {
+	public int getCubicCapacity() {
 		return cubicCapacity;
 	}	
 }

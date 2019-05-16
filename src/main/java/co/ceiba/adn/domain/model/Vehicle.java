@@ -6,7 +6,7 @@ public class Vehicle {
 	private String domainType;	
 	private String domainBrand;
 	private String domainModel;	
-	private String domainCubicCapacity;
+	private int domainCubicCapacity;
 	
 	public Vehicle() {}
 	
@@ -22,7 +22,7 @@ public class Vehicle {
 	
 
 	public Vehicle(long domainTypeId, String domainType, String domainBrand, String domainModel,
-			String domainCubicCapacity) {
+			int domainCubicCapacity) {
 		this.domainTypeId = domainTypeId;
 		this.domainType = domainType;
 		this.domainBrand = domainBrand;
@@ -46,7 +46,7 @@ public class Vehicle {
 		return domainModel;
 	}
 
-	public String getDomainCubicCapacity() {
+	public int getDomainCubicCapacity() {
 		return domainCubicCapacity;
 	}	
 	

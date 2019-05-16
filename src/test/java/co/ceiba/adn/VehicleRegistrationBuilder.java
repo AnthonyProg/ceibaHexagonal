@@ -56,6 +56,13 @@ public class VehicleRegistrationBuilder {
 		return this;
 	}
 	
+	public VehicleRegistrationBuilder setDateSalida(String date) {
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+		LocalDateTime dateTime = LocalDateTime.parse(date, formatter);
+		this.tiempoSalida = dateTime;
+		return this;
+	}
+	
 	public VehicleRegistration build() {
 		return new VehicleRegistration(0L, tiempoIngreso, tiempoSalida, placa , status , tipoVehiculo);
 	}

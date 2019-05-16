@@ -71,7 +71,7 @@ public class CheckOutBusinessRules {
 	}
 	
 	private double calculateExtraFee(double value, VehicleRegistration vehicleRegistration) {
-		int capacity = Integer.parseInt(vehicleRegistration.getDomainVehicleType().getDomainCubicCapacity());
+		int capacity = vehicleRegistration.getDomainVehicleType().getDomainCubicCapacity();
 		if(vehicleRegistration.getDomainVehicleType().getDomainTypeId() == VehicleTypesEnum.BIKE.ordinal()
 				&& capacity > maxCubicCapacity) {
 			return value + capacityFee;			
