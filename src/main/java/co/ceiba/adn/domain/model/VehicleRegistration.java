@@ -9,6 +9,7 @@ public class VehicleRegistration {
 	private LocalDateTime checkOut;
 	private String domainVehiclePlate;
 	private int domainStatus;
+	private double domainValue;
 	private Vehicle domainVehicleType;
 	
 	public VehicleRegistration() {
@@ -48,4 +49,14 @@ public class VehicleRegistration {
 	public Vehicle getDomainVehicleType() {
 		return domainVehicleType;
 	}
+
+	public double getDomainValue() {
+		return domainValue;
+	}
+
+	public void setDomainValue(double domainValue) {
+		this.domainValue = domainValue;
+	}
+	
+	
 }

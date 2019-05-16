@@ -26,9 +26,10 @@ public class CheckOutBusinessRulesTest {
 	}
 	
 	@Test
-	public void ifRegistrationDoesExistThenReturnsTheRegistrationObject() {
+	public void ifRegistrationExistThenReturnsTheRegistrationObject() {
 		VehicleRegistration registration = businessRules.checkIfRegistrationExists(1);
 		assertNotNull(registration);
 		assertEquals(0 , registration.getDomainStatus());
 	}
+
 }

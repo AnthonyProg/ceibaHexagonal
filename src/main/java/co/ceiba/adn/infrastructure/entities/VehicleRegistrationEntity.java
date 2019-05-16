@@ -33,6 +33,9 @@ public class VehicleRegistrationEntity {
 	@Column(name = "status")
 	int status;
 	
+	@Column(name = "value")
+	double value;
+	
 	@ManyToOne(fetch=FetchType.EAGER)
     @JoinColumn(name="vehicle_type")
 	VehicleEntity vehicleType;
@@ -71,4 +74,14 @@ public class VehicleRegistrationEntity {
 	public VehicleEntity getVehicleType() {
 		return vehicleType;
 	}
+
+	public double getValue() {
+		return value;
+	}
+
+	public void setValue(double value) {
+		this.value = value;
+	}
+	
+	
 }
