@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import co.ceiba.adn.application.services.ParkingRegisterService;
-import co.ceiba.adn.domain.exception.VehicleRegistrationException;
 import co.ceiba.adn.domain.model.VehicleRegistration;
 
 @RestController
@@ -18,7 +17,7 @@ public class ParkingRegisterController {
 	
 	@PostMapping(value="/checkin")
     @ResponseBody
-    public void checkInVehicle(@RequestBody VehicleRegistration vehicleRegistration) throws VehicleRegistrationException {
+    public void checkInVehicle(@RequestBody VehicleRegistration vehicleRegistration) {
         parkingRegisterManager.checkIn(vehicleRegistration);
     }
 }

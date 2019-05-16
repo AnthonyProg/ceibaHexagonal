@@ -1,12 +1,10 @@
 package co.ceiba.adn;
 
-import co.ceiba.adn.domain.model.VehicleRegistration;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.time.temporal.ChronoUnit;
 
 import co.ceiba.adn.domain.model.Vehicle;
+import co.ceiba.adn.domain.model.VehicleRegistration;
 
 public class VehicleRegistrationBuilder {
 	

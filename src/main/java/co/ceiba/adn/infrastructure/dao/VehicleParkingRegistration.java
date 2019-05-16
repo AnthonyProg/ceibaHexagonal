@@ -23,4 +23,11 @@ public class VehicleParkingRegistration implements ParkingRegitration {
 		vehiculeRegistrationRepository.save(entity);		 
 	}
 
+	@Override
+	public void actualizar(VehicleRegistration vehicleRegistration) {
+		VehicleRegistrationEntity entity = vehiculeRegistrationRepository.findById(vehicleRegistration.getDomainId());
+		entity.setTotalValue(vehicleRegistration.getDomainValue());
+		vehiculeRegistrationRepository.save(entity);
+	}
+
 }

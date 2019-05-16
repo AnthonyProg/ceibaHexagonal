@@ -33,8 +33,8 @@ public class VehicleRegistrationEntity {
 	@Column(name = "status")
 	int status;
 	
-	@Column(name = "value")
-	double value;
+	@Column(name = "total_value")
+	double totalValue;
 	
 	@ManyToOne(fetch=FetchType.EAGER)
     @JoinColumn(name="vehicle_type")
@@ -75,13 +75,13 @@ public class VehicleRegistrationEntity {
 		return vehicleType;
 	}
 
-	public double getValue() {
-		return value;
+	public double getTotalValue() {
+		return totalValue;
 	}
 
-	public void setValue(double value) {
-		this.value = value;
+	public void setTotalValue(double totalValue) {
+		this.totalValue = totalValue;
 	}
-	
+
 	
 }
