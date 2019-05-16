@@ -6,8 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import co.ceiba.adn.domain.dao.ParkingConsult;
+import co.ceiba.adn.domain.exception.VehicleRegistrationException;
 import co.ceiba.adn.domain.model.Vehicle;
 import co.ceiba.adn.domain.model.VehicleRegistration;
+import co.ceiba.adn.infrastructure.entities.VehicleRegistrationEntity;
 
 @Component
 public class VehicleParkingConsult implements ParkingConsult {
@@ -33,10 +35,12 @@ public class VehicleParkingConsult implements ParkingConsult {
 	}
 
 	@Override
-	public VehicleRegistration findRegistration(long id) {		
-		return Mapper.convertToDomainRegistration(vehicleRegistrationRepository.findById(id));
+	public VehicleRegistration findRegistration(long id) {
+		VehicleRegistrationEntity vehicleRegistration = vehicleRegistrationRepository.findById(id);
+		if(vehicleRegistration == null) {
+			throw new VehicleRegistrationException("Registro no encontrado");
+		}
+		return Mapper.convertToDomainRegistration(vehicleRegistration);
 	}
-	
-
 
 }
