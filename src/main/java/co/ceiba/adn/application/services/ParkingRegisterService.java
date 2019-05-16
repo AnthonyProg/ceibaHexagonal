@@ -15,7 +15,7 @@ public class ParkingRegisterService {
 	public void checkIn(VehicleRegistration vehicleRegistration) {
 		checkInBusinessRules.checkVehicleType(vehicleRegistration);
 		checkInBusinessRules.checkVehiclePlate(vehicleRegistration);
-		checkInBusinessRules.checkAvailableSpace(vehicleRegistration);
+		checkInBusinessRules.checkAvailableSpace(vehicleRegistration, checkInBusinessRules.getOccupiedPlaces(vehicleRegistration));
 		parkingRegistration.register(vehicleRegistration);
 	}
 }

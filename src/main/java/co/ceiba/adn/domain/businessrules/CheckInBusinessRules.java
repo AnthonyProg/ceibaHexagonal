@@ -40,8 +40,7 @@ public class CheckInBusinessRules {
 		}		 
 	}
 	
-	public void checkAvailableSpace(VehicleRegistration vehicleRegistration){
-		long occupied = getOccupiedPlaces(vehicleRegistration);
+	public void checkAvailableSpace(VehicleRegistration vehicleRegistration, long occupied){
 		int maxCars = Integer.parseInt(systemConfigurations.getProperty("config.max-cars"));
 		int maxBikes = Integer.parseInt(systemConfigurations.getProperty("config.max-bikes"));
 		if(vehicleRegistration.getDomainVehicleType().getDomainTypeId() == VehicleTypesEnum.CAR.ordinal() 

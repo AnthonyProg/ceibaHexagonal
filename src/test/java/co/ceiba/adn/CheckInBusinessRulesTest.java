@@ -23,37 +23,37 @@ public class CheckInBusinessRulesTest {
 	@Test
 	public void debeRetornarElTotalDeCarrosParqueados() {
 		VehicleRegistration regitroVehiculo = new VehicleRegistrationBuilder().carro().build();
-		assertTrue(businessRules.getOccupiedPlaces(regitroVehiculo) > 0);
+		assertTrue(businessRules.getOccupiedPlaces(regitroVehiculo) == 20L);
 	}
 	
 	@Test
 	public void debeRetornarElTotalDeMotosParqueadas() {
 		VehicleRegistration regitroVehiculo = new VehicleRegistrationBuilder().moto().build();
-		assertTrue(businessRules.getOccupiedPlaces(regitroVehiculo) > 0);
+		assertTrue(businessRules.getOccupiedPlaces(regitroVehiculo) == 10L);
 	}
 	
 	@Test(expected = VehicleRegistrationException.class)
 	public void debeRetornarErrorSiNoHayMasEspacioParaMoto() {
 		VehicleRegistration regitroVehiculo = new VehicleRegistrationBuilder().moto().build();
-		businessRules.checkAvailableSpace(regitroVehiculo);
+		businessRules.checkAvailableSpace(regitroVehiculo, 10);
 	}
 	
 	@Test(expected = VehicleRegistrationException.class)
 	public void debeRetornarErrorSiNoHayMasEspacioParaCarro() {
 		VehicleRegistration regitroVehiculo = new VehicleRegistrationBuilder().carro().build();
-		businessRules.checkAvailableSpace(regitroVehiculo);
+		businessRules.checkAvailableSpace(regitroVehiculo, 20);
 	}
 	
 	@Test
 	public void siHayEspacioParaMotosContinua() {
 		VehicleRegistration regitroVehiculo = new VehicleRegistrationBuilder().motoMal().build();
-		businessRules.checkAvailableSpace(regitroVehiculo);
+		businessRules.checkAvailableSpace(regitroVehiculo, 5L);
 	}
 	
 	@Test
 	public void siHayEspacioParaCarrosContinua() {
 		VehicleRegistration regitroVehiculo = new VehicleRegistrationBuilder().carroMal().build();
-		businessRules.checkAvailableSpace(regitroVehiculo);
+		businessRules.checkAvailableSpace(regitroVehiculo, 8L);
 	}
 	
 	
