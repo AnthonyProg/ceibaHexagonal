@@ -11,5 +11,7 @@ import co.ceiba.adn.infrastructure.entities.VehicleRegistrationEntity;
 public interface VehicleRegistrationRepositoryJPA extends JpaRepository<VehicleRegistrationEntity, Long> {
 	    
 	public List<VehicleRegistrationEntity> findByStatus(int status);
+	
+	public VehicleRegistrationEntity findById(long id);
 		
 }

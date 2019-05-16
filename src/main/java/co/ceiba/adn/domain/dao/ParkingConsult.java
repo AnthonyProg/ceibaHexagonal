@@ -21,5 +21,12 @@ public interface ParkingConsult {
 	 * @return los registros del parqueadero
 	 */
 	List<VehicleRegistration> listParked(int status);
+	
+	/**
+	 * Permite encontrar un registro de un vehiculo parqueado	 
+	 * 
+	 * @return el registro del parqueadero
+	 */
+	VehicleRegistration findRegistration(long id);
 
 }

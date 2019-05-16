@@ -31,6 +31,11 @@ public class VehicleParkingConsult implements ParkingConsult {
 	public List<VehicleRegistration> listParked(int status) {		
 		return Mapper.converToDomainRegistrationType(vehicleRegistrationRepository.findByStatus(status));
 	}
+
+	@Override
+	public VehicleRegistration findRegistration(long id) {		
+		return Mapper.convertToDomainRegistration(vehicleRegistrationRepository.findById(id));
+	}
 	
 
 
