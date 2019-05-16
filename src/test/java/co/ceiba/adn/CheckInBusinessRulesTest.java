@@ -2,6 +2,9 @@ package co.ceiba.adn;
 
 import static org.junit.Assert.assertTrue;
 
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -71,14 +74,14 @@ public class CheckInBusinessRulesTest {
 	
 	@Test
 	public void siPlacaEmpiezaPorLaLetraConfiguradaYEsElDiaCorrectoEntoncesContinua() {
-		VehicleRegistration registroVehiculo = new VehicleRegistrationBuilder().conPlacaCorrecta().conDiaCorrecto().build();
+		VehicleRegistration registroVehiculo = new VehicleRegistrationBuilder().setDate("2019-05-13 12:30").build();
 		businessRules.checkVehiclePlate(registroVehiculo);
 	}
 	
 
 	@Test(expected = VehicleRegistrationException.class)
 	public void siPlacaEmpiezaPorLaLetraConfiguradaYNOEsElDiaCorrectoEntoncesRetornaError() {
-		VehicleRegistration registroVehiculo = new VehicleRegistrationBuilder().conPlacaCorrecta().conDiaIncorrecto().build();
+		VehicleRegistration registroVehiculo = new VehicleRegistrationBuilder().conPlacaCorrecta().setDate("2019-05-15 12:30").build();
 		businessRules.checkVehiclePlate(registroVehiculo);
 	}
 	

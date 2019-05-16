@@ -3,6 +3,7 @@ package co.ceiba.adn;
 import co.ceiba.adn.domain.model.VehicleRegistration;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 
 import co.ceiba.adn.domain.model.Vehicle;
@@ -50,16 +51,12 @@ public class VehicleRegistrationBuilder {
 		return this;
 	}
 	
-	public VehicleRegistrationBuilder conDiaIncorrecto() {		
-		this.tiempoIngreso = LocalDateTime.now();
+	public VehicleRegistrationBuilder setDate(String date) {
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+		LocalDateTime dateTime = LocalDateTime.parse(date, formatter);
+		this.tiempoIngreso = dateTime;
 		return this;
 	}
-	
-	public VehicleRegistrationBuilder conDiaCorrecto() {		
-		this.tiempoIngreso = LocalDateTime.now().minus(2, ChronoUnit.DAYS);
-		return this;
-	}	
-	
 	
 	public VehicleRegistration build() {
 		return new VehicleRegistration(0L, tiempoIngreso, tiempoSalida, placa , status , tipoVehiculo);
