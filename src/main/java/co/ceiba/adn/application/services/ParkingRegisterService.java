@@ -23,8 +23,7 @@ public class ParkingRegisterService {
 		parkingRegistration.register(vehicleRegistration);
 	}
 	
-	public VehicleRegistration checkOut(long id, LocalDateTime out) {
-		checkOutBusinessRules.init();
+	public VehicleRegistration checkOut(long id, LocalDateTime out) {		
 		VehicleRegistration registration = checkOutBusinessRules.checkIfRegistrationExists(id);
 		checkOutBusinessRules.calculateValueToPay(registration, out);
 		parkingRegistration.actualizar(registration);
