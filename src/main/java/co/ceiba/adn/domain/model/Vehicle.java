@@ -52,9 +52,5 @@ public class Vehicle {
 
 	public void setDomainCubicCapacity(int domainCubicCapacity) {
 		this.domainCubicCapacity = domainCubicCapacity;
-	}
-	
-	
-	
-	
+	}	
 }
