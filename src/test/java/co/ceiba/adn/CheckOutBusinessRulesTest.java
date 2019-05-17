@@ -82,5 +82,23 @@ public class CheckOutBusinessRulesTest {
 		businessRules.calculateValueToPay(registration, dateTime);
 		assertTrue(registration.getDomainValue() == 9000D);
 	}
+	
+	@Test
+	public void mustUpdateZeroForTypeInvalidMoreThanMaxHours() {
+		VehicleRegistration registration = new VehicleRegistrationBuilder().setDate("2019-05-16 13:00").conTipoDeVehiculoErrado().build();
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern(dateFormat);
+		LocalDateTime dateTime = LocalDateTime.parse("2019-05-17 00:00", formatter);
+		businessRules.calculateValueToPay(registration, dateTime);
+		assertTrue(registration.getDomainValue() == 0D);
+	}
+	
+	@Test
+	public void mustUpdateZeroForTypeInvalidBike() {
+		VehicleRegistration registration = new VehicleRegistrationBuilder().setDate("2019-05-16 13:00").conTipoDeVehiculoErrado().build();
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern(dateFormat);
+		LocalDateTime dateTime = LocalDateTime.parse("2019-05-16 21:00", formatter);
+		businessRules.calculateValueToPay(registration, dateTime);
+		assertTrue(registration.getDomainValue() == 0D);
+	}	
 
 }

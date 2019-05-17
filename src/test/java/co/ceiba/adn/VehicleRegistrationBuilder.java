@@ -15,7 +15,7 @@ public class VehicleRegistrationBuilder {
 	int status = 1;
 		
 	public VehicleRegistrationBuilder conTipoDeVehiculoErrado() {		
-		this.tipoVehiculo = new Vehicle("AVION");
+		this.tipoVehiculo = new Vehicle(10,"AVION");
 		return this;
 	}
 	
