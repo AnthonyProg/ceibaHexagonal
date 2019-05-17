@@ -63,6 +63,11 @@ public class VehicleRegistrationBuilder {
 		return this;
 	}
 	
+	public VehicleRegistrationBuilder cilindradaMayor() {
+		this.tipoVehiculo.setDomainCubicCapacity(650);		
+		return this;
+	}
+	
 	public VehicleRegistration build() {
 		return new VehicleRegistration(0L, tiempoIngreso, tiempoSalida, placa , status , tipoVehiculo);
 	}

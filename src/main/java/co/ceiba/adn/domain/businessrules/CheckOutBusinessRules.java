@@ -53,7 +53,7 @@ public class CheckOutBusinessRules {
 		}else {
 			total = calculateMoreThanMaxHours(vehicleRegistration, hoursThatPassed, daysThatPaseed);
 		}
-		total += calculateExtraFee(total, vehicleRegistration);
+		total = calculateExtraFee(total, vehicleRegistration);
 		vehicleRegistration.setDomainValue(total);
 	}
 	
@@ -81,6 +81,6 @@ public class CheckOutBusinessRules {
 				&& capacity > maxCubicCapacity) {
 			return value + capacityFee;			
 		}
-		return 0;		
+		return value;		
 	}
 }
