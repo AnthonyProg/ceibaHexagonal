@@ -75,6 +75,15 @@ public class CheckOutBusinessRulesTest {
 	}
 	
 	@Test
+	public void mustUpdateTheTotalValueToPayForTypeBikeDays() {
+		VehicleRegistration registration = new VehicleRegistrationBuilder().setDate("2019-05-16 13:00").moto().build();
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern(dateFormat);
+		LocalDateTime dateTime = LocalDateTime.parse("2019-05-17 14:15", formatter);
+		businessRules.calculateValueToPay(registration, dateTime);
+		assertTrue(registration.getDomainValue() == 4500D);
+	}
+	
+	@Test
 	public void mustUpdateTheTotalValueToPayForTypeCarDays() {
 		VehicleRegistration registration = new VehicleRegistrationBuilder().setDate("2019-05-16 13:00").carro().build();
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern(dateFormat);
@@ -126,13 +135,6 @@ public class CheckOutBusinessRulesTest {
 		LocalDateTime dateTime = LocalDateTime.parse("2019-05-16 13:10", formatter);
 		businessRules.calculateValueToPay(registration, dateTime);
 		assertTrue(registration.getDomainValue() == 1000D);
-	}
-	
-	
-	
-	
-	
-	
-	
+	}	
 
 }
