@@ -109,5 +109,30 @@ public class CheckOutBusinessRulesTest {
 		businessRules.calculateValueToPay(registration, dateTime);
 		assertTrue(registration.getDomainValue() == 6000D);
 	}
+	
+	@Test
+	public void bikeMinimunValueToPay() {
+		VehicleRegistration registration = new VehicleRegistrationBuilder().setDate("2019-05-16 13:00").moto().build();
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern(dateFormat);
+		LocalDateTime dateTime = LocalDateTime.parse("2019-05-16 13:10", formatter);
+		businessRules.calculateValueToPay(registration, dateTime);
+		assertTrue(registration.getDomainValue() == 500D);
+	}
+	
+	@Test
+	public void carMinimunValueToPay() {
+		VehicleRegistration registration = new VehicleRegistrationBuilder().setDate("2019-05-16 13:00").carro().build();
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern(dateFormat);
+		LocalDateTime dateTime = LocalDateTime.parse("2019-05-16 13:10", formatter);
+		businessRules.calculateValueToPay(registration, dateTime);
+		assertTrue(registration.getDomainValue() == 1000D);
+	}
+	
+	
+	
+	
+	
+	
+	
 
 }
