@@ -24,6 +24,7 @@ public class CheckOutBusinessRules {
 	private double maxHours;
 	private double maxCubicCapacity;
 	private double capacityFee;
+	private static int fullDayHours = 24;
 	
 	@Autowired
 	public CheckOutBusinessRules(ParkingConsult parkingConsult, Environment config) {
@@ -48,26 +49,30 @@ public class CheckOutBusinessRules {
 		long daysThatPaseed = ChronoUnit.DAYS.between(checkInTime, out);
 		double total = 0;
 		if(hoursThatPassed < maxHours) {
-			if(vehicleRegistration.getDomainVehicleType().getDomainTypeId() == VehicleTypesEnum.CAR.ordinal()) {
-				total = hourValueCar * hoursThatPassed;
-			}else if(vehicleRegistration.getDomainVehicleType().getDomainTypeId() == VehicleTypesEnum.BIKE.ordinal()) {
-				total = hourValueBike * hoursThatPassed;
-			}
-		}else if(daysThatPaseed == 0) {
-			if(vehicleRegistration.getDomainVehicleType().getDomainTypeId() == VehicleTypesEnum.CAR.ordinal()) {
-				total = dayValueCar;
-			}else if(vehicleRegistration.getDomainVehicleType().getDomainTypeId() == VehicleTypesEnum.BIKE.ordinal()) {
-				total = dayValueBike;
-			}
+			total = calculateLessThanMaxHours(vehicleRegistration, hoursThatPassed);
 		}else {
-			if(vehicleRegistration.getDomainVehicleType().getDomainTypeId() == VehicleTypesEnum.CAR.ordinal()) {
-				total = (dayValueCar * daysThatPaseed) + (hourValueCar * hoursThatPassed);
-			}else if(vehicleRegistration.getDomainVehicleType().getDomainTypeId() == VehicleTypesEnum.BIKE.ordinal()) {
-				total = (dayValueBike * daysThatPaseed) + (hourValueBike * hoursThatPassed);
-			}
+			total = calculateMoreThanMaxHours(vehicleRegistration, hoursThatPassed, daysThatPaseed);
 		}
 		total += calculateExtraFee(total, vehicleRegistration);
 		vehicleRegistration.setDomainValue(total);
+	}
+	
+	private double calculateLessThanMaxHours(VehicleRegistration vehicleRegistration, long hoursThatPassed) {
+		if(vehicleRegistration.getDomainVehicleType().getDomainTypeId() == VehicleTypesEnum.CAR.ordinal()) {
+			return hoursThatPassed == 0 ? hourValueCar : hourValueCar * hoursThatPassed;
+		}else if(vehicleRegistration.getDomainVehicleType().getDomainTypeId() == VehicleTypesEnum.BIKE.ordinal()) {
+			return hoursThatPassed == 0 ? hourValueBike : hourValueBike * hoursThatPassed;
+		}
+		return 0;
+	}
+	
+	private double calculateMoreThanMaxHours(VehicleRegistration vehicleRegistration, long hoursThatPassed, long daysThatPaseed) {
+		if(vehicleRegistration.getDomainVehicleType().getDomainTypeId() == VehicleTypesEnum.CAR.ordinal()) {
+			return daysThatPaseed == 0 ? dayValueCar : (dayValueCar * daysThatPaseed) + (hourValueCar * ( hoursThatPassed - (fullDayHours * daysThatPaseed)));
+		}else if(vehicleRegistration.getDomainVehicleType().getDomainTypeId() == VehicleTypesEnum.BIKE.ordinal()) {
+			return daysThatPaseed == 0 ? dayValueBike : (dayValueBike * daysThatPaseed) + (hourValueBike * (hoursThatPassed - (fullDayHours * daysThatPaseed)));
+		}
+		return 0;
 	}
 	
 	private double calculateExtraFee(double value, VehicleRegistration vehicleRegistration) {
