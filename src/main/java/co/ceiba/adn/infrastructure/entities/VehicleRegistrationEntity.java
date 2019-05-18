@@ -62,6 +62,12 @@ public class VehicleRegistrationEntity {
 	public LocalDateTime getCheckOutTimeStamp() {
 		return checkOutTimeStamp;
 	}
+	
+	
+
+	public void setCheckOutTimeStamp(LocalDateTime checkOutTimeStamp) {
+		this.checkOutTimeStamp = checkOutTimeStamp;
+	}
 
 	public String getVehiclePlate() {
 		return vehiclePlate;
@@ -70,9 +76,19 @@ public class VehicleRegistrationEntity {
 	public int getStatus() {
 		return status;
 	}
+	
+	
+
+	public void setStatus(int status) {
+		this.status = status;
+	}
 
 	public VehicleEntity getVehicleType() {
 		return vehicleType;
+	}	
+
+	public void setVehicleType(VehicleEntity vehicleType) {
+		this.vehicleType = vehicleType;
 	}
 
 	public double getTotalValue() {

@@ -2,8 +2,12 @@ package co.ceiba.adn.domain.model;
 
 import java.time.LocalDateTime;
 
-public class VehicleRegistration {
+import org.springframework.format.annotation.DateTimeFormat;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
+public class VehicleRegistration {
+	
 	private long domainId;
 	private LocalDateTime checkIn;
 	private LocalDateTime checkOut;
@@ -57,6 +61,12 @@ public class VehicleRegistration {
 	public void setDomainValue(double domainValue) {
 		this.domainValue = domainValue;
 	}
+
+	public void setCheckOut(LocalDateTime checkOut) {
+		this.checkOut = checkOut;
+	}
+	
+	
 	
 	
 }

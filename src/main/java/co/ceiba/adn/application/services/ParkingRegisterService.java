@@ -2,6 +2,7 @@ package co.ceiba.adn.application.services;
 
 import java.time.LocalDateTime;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import co.ceiba.adn.domain.businessrules.CheckInBusinessRules;
@@ -16,6 +17,13 @@ public class ParkingRegisterService {
 	private CheckOutBusinessRules checkOutBusinessRules;
 	private ParkingRegitration parkingRegistration;
 	
+	@Autowired
+	public ParkingRegisterService(CheckInBusinessRules checkInBusinessRules, CheckOutBusinessRules checkOutBusinessRules,ParkingRegitration parkingRegistration) {
+		this.checkInBusinessRules = checkInBusinessRules;
+		this.checkOutBusinessRules = checkOutBusinessRules;
+		this.parkingRegistration = parkingRegistration;
+	}
+	
 	public void checkIn(VehicleRegistration vehicleRegistration) {
 		checkInBusinessRules.checkVehicleType(vehicleRegistration);
 		checkInBusinessRules.checkVehiclePlate(vehicleRegistration);
@@ -23,10 +31,11 @@ public class ParkingRegisterService {
 		parkingRegistration.register(vehicleRegistration);
 	}
 	
-	public VehicleRegistration checkOut(long id, LocalDateTime out) {		
+	public String checkOut(long id, LocalDateTime out) {		
 		VehicleRegistration registration = checkOutBusinessRules.checkIfRegistrationExists(id);
+		registration.setCheckOut(out);
 		checkOutBusinessRules.calculateValueToPay(registration, out);
-		parkingRegistration.actualizar(registration);
-		return registration;
+		parkingRegistration.update(registration);
+		return String.valueOf(registration.getDomainValue());
 	}
 }

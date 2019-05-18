@@ -17,6 +17,6 @@ public interface ParkingRegitration {
 	 * @return void
 	 * @throws VehicleRegistrationException
 	 */
-	void actualizar(VehicleRegistration vehicleRegistration);
+	void update(VehicleRegistration vehicleRegistration);
 
 }
