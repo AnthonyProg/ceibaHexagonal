@@ -1,5 +1,6 @@
 package co.ceiba.adn.domain.businessrules;
 
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -33,7 +34,7 @@ public class CheckInBusinessRules {
 	
 	public void checkVehiclePlate(VehicleRegistration vehicleRegistration) {
 		String letter = systemConfigurations.getProperty("config.letter");		
-		int dayOfWeek = vehicleRegistration.getCheckIn().getDayOfWeek().getValue();		
+		int dayOfWeek = LocalDateTime.now().getDayOfWeek().getValue();		
 		List<String> daysAllowed = Arrays.asList(systemConfigurations.getProperty("config.days").split(","));
 		if(vehicleRegistration.getDomainVehiclePlate().startsWith(letter) && !daysAllowed.contains(String.valueOf(dayOfWeek))) {
 			throw new VehicleRegistrationException("NO tiene permitido el ingreso.");

@@ -61,12 +61,15 @@ public class VehicleRegistrationEntity {
 
 	public LocalDateTime getCheckOutTimeStamp() {
 		return checkOutTimeStamp;
-	}
-	
-	
+	}	
 
 	public void setCheckOutTimeStamp(LocalDateTime checkOutTimeStamp) {
 		this.checkOutTimeStamp = checkOutTimeStamp;
+	}	
+	
+
+	public void setCheckInTimeStamp(LocalDateTime checkInTimeStamp) {
+		this.checkInTimeStamp = checkInTimeStamp;
 	}
 
 	public String getVehiclePlate() {

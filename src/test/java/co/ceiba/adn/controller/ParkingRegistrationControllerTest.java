@@ -40,7 +40,7 @@ public class ParkingRegistrationControllerTest {
 		  try {			  
 			  this.mockMvc.perform(post("/checkin")
 					  .characterEncoding("utf-8")
-					  .content("{\"checkIn\":\"2019-05-20T10:00:00\",\"domainVehiclePlate\":\"BBBBBB\",\"domainStatus\":0,\"domainValue\":0,\"domainVehicleType\":{\"domainType\":\"CARRO\",\"domainCubicCapacity\":0}}")
+					  .content("{\"domainVehiclePlate\":\"BBBBBB\",\"domainStatus\":0,\"domainValue\":0,\"domainVehicleType\":{\"domainType\":\"CARRO\",\"domainCubicCapacity\":0}}")
 					  .contentType(MediaType.APPLICATION_JSON_UTF8_VALUE)).andExpect(status().isOk());
 		  }catch(Exception ex) {
 			  throw new VehicleRegistrationException("Error en la prueba", ex);

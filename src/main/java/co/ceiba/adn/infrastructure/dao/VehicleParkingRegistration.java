@@ -1,5 +1,7 @@
 package co.ceiba.adn.infrastructure.dao;
 
+import java.time.LocalDateTime;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -28,6 +30,7 @@ public class VehicleParkingRegistration implements ParkingRegitration {
 		VehicleEntity vehicle = vehicleTypeRepository.findById(vehicleRegistration.getDomainVehicleType().getDomainTypeId())
 				.orElseThrow(() -> new VehicleRegistrationException("Tipo de Vehiculo no encontrado"));
 		entity.setVehicleType(vehicle);
+		entity.setCheckInTimeStamp(LocalDateTime.now());
 		vehiculeRegistrationRepository.save(entity);		 
 	}
 
@@ -35,7 +38,7 @@ public class VehicleParkingRegistration implements ParkingRegitration {
 	public void update(VehicleRegistration vehicleRegistration) {
 		VehicleRegistrationEntity entity = vehiculeRegistrationRepository.findById(vehicleRegistration.getDomainId());
 		entity.setTotalValue(vehicleRegistration.getDomainValue());
-		entity.setCheckOutTimeStamp(vehicleRegistration.getCheckOut());
+		entity.setCheckOutTimeStamp(LocalDateTime.now());
 		entity.setStatus(RegistrationStatusEnum.NOT_PARKED.ordinal());
 		vehiculeRegistrationRepository.save(entity);
 	}

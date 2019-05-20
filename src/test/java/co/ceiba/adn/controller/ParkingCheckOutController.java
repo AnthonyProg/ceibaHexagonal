@@ -40,7 +40,7 @@ public class ParkingCheckOutController {
 		  try {			  
 			  this.mockMvc.perform(post("/checkout")
 					  .characterEncoding("utf-8")
-					  .content("{\"checkOut\":\"2019-05-20T10:02:00\",\"domainId\":1}")
+					  .content("{\"domainId\":1}")
 					  .contentType(MediaType.APPLICATION_JSON_UTF8_VALUE)).andExpect(status().isOk());
 		  }catch(Exception ex) {
 			  throw new VehicleRegistrationException("Error en la prueba", ex);
