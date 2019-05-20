@@ -1,4 +1,4 @@
-package co.ceiba.adn;
+package co.ceiba.adn.controller;
 
 import static io.restassured.RestAssured.when;
 import static org.hamcrest.Matchers.containsString;

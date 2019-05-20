@@ -1,4 +1,4 @@
-package co.ceiba.adn;
+package co.ceiba.adn.integration;
 
 
 import static org.junit.Assert.assertFalse;
