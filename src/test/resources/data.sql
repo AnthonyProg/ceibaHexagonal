@@ -30,3 +30,6 @@ VALUES
   (current_timestamp(),current_timestamp(),'AAAAAA',0,0,1),
   (current_timestamp(),current_timestamp(),'AAAAAA',0,0,1),
   (current_timestamp(),current_timestamp(),'AAAAAA',0,0,1);
+  
+  DELETE FROM vehicle_registration WHERE ID = 2;
+  
