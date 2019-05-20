@@ -2,10 +2,6 @@ package co.ceiba.adn.domain.model;
 
 import java.time.LocalDateTime;
 
-import org.springframework.format.annotation.DateTimeFormat;
-
-import com.fasterxml.jackson.annotation.JsonFormat;
-
 public class VehicleRegistration {
 	
 	private long domainId;

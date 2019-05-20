@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import co.ceiba.adn.domain.dao.ParkingRegitration;
+import co.ceiba.adn.domain.exception.VehicleRegistrationException;
 import co.ceiba.adn.domain.model.RegistrationStatusEnum;
 import co.ceiba.adn.domain.model.VehicleRegistration;
 import co.ceiba.adn.infrastructure.entities.VehicleEntity;
@@ -24,7 +25,8 @@ public class VehicleParkingRegistration implements ParkingRegitration {
 	@Override
 	public void register(VehicleRegistration vehicleRegistration) {
 		VehicleRegistrationEntity entity = Mapper.convertToEntityRegistration(vehicleRegistration);
-		VehicleEntity vehicle = vehicleTypeRepository.findById(vehicleRegistration.getDomainVehicleType().getDomainTypeId()).get();
+		VehicleEntity vehicle = vehicleTypeRepository.findById(vehicleRegistration.getDomainVehicleType().getDomainTypeId())
+				.orElseThrow(() -> new VehicleRegistrationException("Tipo de Vehiculo no encontrado"));
 		entity.setVehicleType(vehicle);
 		vehiculeRegistrationRepository.save(entity);		 
 	}
