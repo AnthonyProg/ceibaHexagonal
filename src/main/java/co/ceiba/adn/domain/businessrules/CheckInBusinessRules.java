@@ -25,8 +25,8 @@ public class CheckInBusinessRules {
 	private ParkingConsult parkingConsult;
 	
 	public void checkVehicleType(VehicleRegistration vehicleRegistration) {
-		Optional<Vehicle> result = parkingConsult.list().stream().filter(s -> s.getDomainType()
-				.equals(vehicleRegistration.getDomainVehicleType().getDomainType())).findFirst();
+		Optional<Vehicle> result = parkingConsult.list().stream().filter(s -> s.getDomainTypeId()
+				 == vehicleRegistration.getDomainVehicleType().getDomainTypeId()).findFirst();
 		if(!result.isPresent()) {
 			throw new VehicleRegistrationException("tipo de vehiculo no permitido");
 		}	
